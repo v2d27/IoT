@@ -16,7 +16,7 @@
 <script type="text/javascript">
 
   // Create a client instance
-  client = new Paho.MQTT.Client("m14.cloudmqtt.com", 30982,"client_id_16s51f65as1");
+  client = new Paho.MQTT.Client("m14.cloudmqtt.com", 30982,"client_id_1" + parseInt(Math.random() * 100, 10));
   //Example client = new Paho.MQTT.Client("m11.cloudmqtt.com", 32903, "web_" + parseInt(Math.random() * 100, 10));
 
   // set callback handlers
