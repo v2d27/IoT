@@ -1,19 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>MQTT ESP8266 test</title>
 </head>
 <body>
-	<a>Creating connection to cloudmqtt server successfully!</a>
-	<br>
-	<a>Turn on console to see it..!</a>
+	<div id="message_arrive">Creating conncetion with ESP8266 device...</div>
+	<input type="text" name="message_text" id="message_text" required width="200px">
+	<button id="message_send" onclick="message_send();">Send message</button>
+
+	<script type="text/javascript">
+		function message_send()
+		{
+			var data = document.getElementById("message_text").value;
+			console.log("sending: " + data);
+			message = new Paho.MQTT.Message(data);
+			message.destinationName = "client_user";
+			client.send(message);
+		}
+	</script>
 </body>
 </html>
 
-
-
-<script src="mqttws31.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
 <script type="text/javascript">
+
   // Create a client instance
   client = new Paho.MQTT.Client("m14.cloudmqtt.com", 30982,"client_id_1" + parseInt(Math.random() * 100, 10));
   //Example client = new Paho.MQTT.Client("m11.cloudmqtt.com", 32903, "web_" + parseInt(Math.random() * 100, 10));
@@ -29,6 +39,11 @@
   }
   // connect the client
   client.connect(options);
+
+
+
+  
+
   // called when the client connects
   function onConnect() {
     // Once a connection has been made, make a subscription and send a message.
@@ -38,17 +53,22 @@
     message.destinationName = "client_user";
     client.send(message);
   }
+
   function doFail(e){
     console.log(e);
   }
+
   // called when the client loses its connection
   function onConnectionLost(responseObject) {
     if (responseObject.errorCode !== 0) {
       console.log("onConnectionLost:"+responseObject.errorMessage);
     }
   }
+
   // called when a message arrives
   function onMessageArrived(message) {
-    console.log("onMessageArrived:"+message.payloadString);
+    console.log("onMessageArrived:" + message.payloadString);
+    var tempdata = document.getElementsById("message_arrive").innerHTML;
+    document.getElementsById("message_arrive").innerHTML = tempdata + "<br>" + message.payloadString;
   }
 </script>
