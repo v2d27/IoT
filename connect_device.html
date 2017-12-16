@@ -13,10 +13,17 @@
 
 	function message_send()
 	{
-		var obj = new Object();
-		obj.msg = $('message_text').value;
-		var jsonstring = JSON.stringify(obj);
-		mqtt_push(jsonstring);
+		if (MQTT_ON_CONNECTED === true) {
+			var obj = new Object();
+			obj.msg = $('message_text').value;
+			var jsonstring = JSON.stringify(obj);
+			mqtt_push(jsonstring);
+		}
+		else
+		{
+			alert("Network connction is lost. Please reconnect...");
+		}
+
 	}
 
 	function btn_server()
