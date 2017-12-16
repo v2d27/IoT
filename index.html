@@ -1,54 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+  <title>MQTT with WebSocket</title>
 </head>
 <body>
-	<a>Creating connection to cloudmqtt server successfully!</a>
-	<br>
-	<a>Turn on console to see it..!</a>
+  <a href="connect_device.html">Control your ESP8266 device</a>
 </body>
 </html>
-
-
-
-<script src="mqttws31.js" type="text/javascript"></script>
-<script type="text/javascript">
-  // Create a client instance
-  client = new Paho.MQTT.Client("m14.cloudmqtt.com", 30982,"client_id_1" + parseInt(Math.random() * 100, 10));
-  //Example client = new Paho.MQTT.Client("m11.cloudmqtt.com", 32903, "web_" + parseInt(Math.random() * 100, 10));
-  // set callback handlers
-  client.onConnectionLost = onConnectionLost;
-  client.onMessageArrived = onMessageArrived;
-  var options = {
-    useSSL: true,
-    userName: "lffknbep",
-    password: "a1MJ1J3WSCbm",
-    onSuccess:onConnect,
-    onFailure:doFail
-  }
-  // connect the client
-  client.connect(options);
-  // called when the client connects
-  function onConnect() {
-    // Once a connection has been made, make a subscription and send a message.
-    console.log("onConnect");
-    client.subscribe("client_user");
-    message = new Paho.MQTT.Message("Hello CloudMQTT");
-    message.destinationName = "client_user";
-    client.send(message);
-  }
-  function doFail(e){
-    console.log(e);
-  }
-  // called when the client loses its connection
-  function onConnectionLost(responseObject) {
-    if (responseObject.errorCode !== 0) {
-      console.log("onConnectionLost:"+responseObject.errorMessage);
-    }
-  }
-  // called when a message arrives
-  function onMessageArrived(message) {
-    console.log("onMessageArrived:"+message.payloadString);
-  }
-</script>

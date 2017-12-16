@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>connecting to device status...</title>
+	<title>Test and Control device</title>
 </head>
 
 <script type="text/javascript" src="mqttws31.js"></script>
@@ -25,7 +25,7 @@
 		$("btn_connect_server").style.backgroundColor = '#555555';
 		client.connect(options);
 	}
-
+	
 	function esp8266_device()
 	{
 		if (MQTT_ON_CONNECTED === true) {
@@ -98,7 +98,7 @@
 	    var s = today.getSeconds();
 	    m = m >= 10 ? m : "0" + m;
 	    s = s >= 10 ? s : "0" + s;
-	    var str = h + ":" + m + ":" + s + ">" + message.payloadString;
+	    var str = h + ":" + m + ":" + s + " > " + message.payloadString;
 	    $('id_message_arrive').innerHTML += str + "<br>";
 		console.log("onMessageArrived " + str);
 	}
@@ -156,23 +156,32 @@ body {
 <body>
 	<div>
 		<div>Step 1: Connect to MQTT broker server...</div>
-		<button id="btn_connect_server" class="btn btn-large" onclick="btn_server();">Connect to MQTT</button>
+		<button id="btn_connect_server" class="btn btn-large">Connect to MQTT</button>
 	</div>
 
 	<div>
 		<div>Step 2: Connect to ESP8266 device...</div>
-		<button id="btn_connect_esp8266" class="btn btn-large" onclick="esp8266_device();">Connect to ESP8266 device</button>
+		<button id="btn_connect_esp8266" class="btn btn-large">Connect to ESP8266 device</button>
 	</div>
 
 	<div>
 		<div>Step 3: Finish. Let's control your device.</div>
 		<input type="text" id="message_text" required class="input input-message">
-		<button id="btn_messege_send" class="btn btn-normal" onclick="message_send();">Send</button>	
+		<button id="btn_messege_send" class="btn btn-normal">Send</button>	
 	</div>
 
 	<div>
 		<div>Message arrives:</div>
-		<div id="id_message_arrive" style="padding: 10px 0; font-weight: 400;"></div>
+		<div id="id_message_arrive"></div>
 	</div>
 </body>
+
+
+
+<script type="text/javascript">
+	// Control Click event listener
+	$("btn_connect_server").onclick = btn_server;
+	$("btn_connect_esp8266").onclick = esp8266_device;
+	$("btn_messege_send").onclick = message_send;
+</script>
 </html>
