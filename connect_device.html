@@ -14,7 +14,7 @@
 	function message_send()
 	{
 		var obj = new Object();
-		obj.message = $('message_text').value;
+		obj.msg = $('message_text').value;
 		var jsonstring = JSON.stringify(obj);
 		mqtt_push(jsonstring);
 	}
