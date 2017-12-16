@@ -99,7 +99,7 @@
 	    m = m >= 10 ? m : "0" + m;
 	    s = s >= 10 ? s : "0" + s;
 	    var str = h + ":" + m + ":" + s + ">" + message.payloadString;
-	    $('id_message_arrive').innerHTML = str + "<br>";
+	    $('id_message_arrive').innerHTML += str + "<br>";
 		console.log("onMessageArrived " + str);
 	}
 </script>
