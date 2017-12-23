@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>IoT Sign in</title>
+	<title>IoT Project 2017</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="../logo/iot_logo.png">
+	<script src="./jssha256.js"></script>
+	<script src="./iot-user.js"></script>
+</head>
+
+<script type="text/javascript">
+function iot_onload() {
+    if (iot_is_login()) {
+        window.location.href = "../index.html";
+    }
+}
+if (window.addEventListener)
+    window.addEventListener("load", iot_onload, false);
+else if (window.attachEvent)
+    window.attachEvent("onload", iot_onload);
+else window.onload = iot_onload;
+</script>
+
+<style>
+body, html {
+  font: 400 15px/1.8 "Segoe UI", sans-serif;
+  color: #777;
+  -webkit-text-size-adjust:none;
+  background-color: #EEE;
+}
+
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+}
+
+.align-bottom {
+  position: fixed;
+  top: 95%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+}
+
+.main {
+	border: 1px solid #CCC;
+	width: 400px;
+	min-width: 400px;
+	min-height: 400px;
+	background-color: #FFFFFF;
+}
+
+.cap
+{
+	font-size: 24px;
+	display: inherit;
+	color: #FFFFFF;
+	letter-spacing: 2px;
+	text-align: center;
+	text-shadow: 
+		 1px -1px 5px rgba(0, 0, 0, 0.2),
+		-1px  1px 5px rgba(0, 0, 0, 0.2),
+		 1px  1px 5px rgba(0, 0, 0, 0.2),
+		-1px -1px 5px rgba(0, 0, 0, 0.2),
+		 0px  1px 5px rgba(0, 0, 0, 0.2),
+		 0px -1px 5px rgba(0, 0, 0, 0.2),
+		 1px  0px 5px rgba(0, 0, 0, 0.2),
+		-1px  0px 5px rgba(0, 0, 0, 0.2);
+}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 15px;
+    color: #333;
+}
+
+button {
+	font: 400 15px/1.8 "Segoe UI", sans-serif;
+    background-color: #12ad18;
+    color: white;
+    padding: 10px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover:not(.btn-disable){
+    opacity: 0.8;
+}
+
+.btn-disable
+{
+	background-color:#888888;
+}
+
+.btn-enable
+{
+	z-index: 0;
+}
+
+.cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+}
+
+.image-logo {
+    text-align: center;
+    margin: 24px 0 12px 0;
+}
+
+.image-logo img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.container {
+    padding: 16px;
+}
+
+span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+
+.loader {
+  vertical-align: middle;
+  margin-right: 8px;
+  border: 6px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 6px solid #3498db;
+  width: 14px;
+  height: 14px;
+  -webkit-animation: spin 0.75s linear infinite; /* Safari */
+  animation: spin 0.75s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+</style>
+<body >
+<div class="main centered">
+  <div class="image-logo">
+    <img src="../logo/iot_logo.png" alt="IoT Logo">
+  </div>
+
+  <div class="cap">IoT Control Panel</div>
+
+  <div class="container">
+    <label><b>Username:</b></label>
+    <input type="text" placeholder="Enter Username" name="uname" id="username">
+
+    <label><b>Password:</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" id="password">
+        
+	<div id="error" style="color: red;"></div>
+    <button id="btn-signin"><div class="loader" id="loader" hidden></div>Sign In</button>
+  </div>
+</div>
+<div class="align-bottom">Copyright December, 2017 By Hercules</div>
+</body>
+</html>
+
+<script type="text/javascript">
+	function $(eleid) {
+		return document.getElementById(eleid);
+	}
+
+	$("btn-signin").onclick = function() {
+		$("btn-signin").classList.add("btn-disable");
+		$("loader").style.display = "inline-block";
+
+		var username = $("username").value;
+		var password = $("password").value;
+		var error = $("error");
+		error.innerHTML = "";
+		if (username === "") {
+			error.innerHTML = "* Note: Please enter your username.";
+			$("btn-signin").classList.remove("btn-disable");
+			$("loader").style.display = "none";
+			return ;
+		}
+		else {
+			if (password === "") {
+				error.innerHTML = "* Note: Please enter your password to login.";
+				$("btn-signin").classList.remove("btn-disable");
+				$("loader").style.display = "none";
+				return ;
+			}
+		}
+
+		var data = HMAC_SHA256_MAC("p9xpk7ok6iw6e4pka2o1x2gm4ug7q", username + " " + password);
+		if (iot_login(data) === true) {
+			alert("login successfully.");
+			window.location.href = "../index.html";
+		}
+		else
+		{
+			error.innerHTML = "* Please check your username or your password again.";
+			$("btn-signin").classList.remove("btn-disable");
+			$("loader").style.display = "none";
+			return ;
+		}
+
+
+	}
+</script>
