@@ -21,6 +21,7 @@ if (window.addEventListener)
 else if (window.attachEvent)
     window.attachEvent("onload", iot_onload);
 else window.onload = iot_onload;
+
 </script>
 
 <style>
@@ -188,10 +189,18 @@ span.psw {
 		return document.getElementById(eleid);
 	}
 
-	$("btn-signin").onclick = function() {
-		$("btn-signin").classList.add("btn-disable");
-		$("loader").style.display = "inline-block";
+	function sleep(ms) {
+	    var unixtime_ms = new Date().getTime();
+	    while(new Date().getTime() < unixtime_ms + ms) {}
+	}
 
+	function redirect()
+	{
+		window.location.href = "../index.html";
+	}
+
+	function login()
+	{
 		var username = $("username").value;
 		var password = $("password").value;
 		var error = $("error");
@@ -200,30 +209,37 @@ span.psw {
 			error.innerHTML = "* Note: Please enter your username.";
 			$("btn-signin").classList.remove("btn-disable");
 			$("loader").style.display = "none";
-			return ;
+			return false;
 		}
 		else {
 			if (password === "") {
 				error.innerHTML = "* Note: Please enter your password to login.";
 				$("btn-signin").classList.remove("btn-disable");
 				$("loader").style.display = "none";
-				return ;
+				return false;
 			}
 		}
 
 		var data = HMAC_SHA256_MAC("p9xpk7ok6iw6e4pka2o1x2gm4ug7q", username + " " + password);
 		if (iot_login(data) === true) {
-			alert("login successfully.");
-			window.location.href = "../index.html";
+			error.style.color = "#12ad18";
+			error.innerHTML = "✔ Sign-in successfully. Redirecting...";
+			setTimeout(redirect, 1000);
+			return true;
 		}
 		else
 		{
 			error.innerHTML = "* Please check your username or your password again.";
 			$("btn-signin").classList.remove("btn-disable");
 			$("loader").style.display = "none";
-			return ;
+			return false;
 		}
+	}
 
 
+	$("btn-signin").onclick = function() {
+		$("btn-signin").classList.add("btn-disable");
+		$("loader").style.display = "inline-block";
+		setTimeout(login, 700);
 	}
 </script>
