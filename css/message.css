@@ -1,0 +1,72 @@
+.message-body {
+    overflow-y: scroll;
+	border: 1px solid #DDD;
+	width:  300px;
+	min-height: 300px;
+	height: 400px;
+	min-width: 300px;
+}
+
+.message-body .msg-content {
+	background: #FFF;
+	color: #a0e;
+	border-radius: 10px;
+	border: 1px solid #24d5df;
+	display: block;
+	padding: 5px 10px;
+}
+
+.msg-recieve {
+	margin: 10px 20px;
+	margin-right: 40px;
+	text-align: left;
+}
+
+.msg-send {
+	margin: 10px 20px;
+	margin-left: 40px;
+	text-align: right;
+}
+
+.message-body .msg-send time {
+	margin-top: 5px;
+	text-align: center;
+	font-size: 12px;
+	display: block;
+	color: #555;
+}
+
+.message-body .msg-recieve time {
+	margin-top: 5px;
+	text-align: center;
+	font-size: 12px;
+	display: block;
+	color: #555;
+}
+
+/*Input text and button command*/
+.message-control {
+	width: 300px;
+	min-width: 300px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.message-control input {
+	background: #FFFFFF;
+	width: 210px;
+	height: 20px;
+	color: #555;
+}
+.message-control button {
+	cursor: pointer;
+    background: #226bac;
+    color: #FFFFFF;
+    float: right;
+    border: 0px;
+    padding: 5px 10px;
+    padding-bottom: 6px;
+}
+
+.message-control button:hover {
+	opacity: 0.9;
+}

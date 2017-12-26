@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>IoT Project 2017</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" href="./logo/iot_logo.png">
+	<script type="text/javascript" src="./login/iot-user.js"></script>
+	<link rel="stylesheet" type="text/css" href="./css/message.css">
+</head>
+<script type="text/javascript">
+function iot_onload() {
+	return ;
+    if (iot_is_login() === false) {
+        window.location.href = "./login/index.html";
+    }
+}
+if (window.addEventListener)
+    window.addEventListener("load", iot_onload, false);
+else if (window.attachEvent)
+    window.attachEvent("onload", iot_onload);
+else window.onload = iot_onload;
+</script>
+
+<style type="text/css"> /*header-bar creating object*/
+body, html {
+  /*height: 100%;*/
+  margin: 0;
+  font: 400 15px/1.8 "Lato", sans-serif;
+  color: #777;
+  -webkit-text-size-adjust:none;
+}
+
+.header-bar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+
+    /*Fix top*/
+    position: sticky!important;
+    position: -webkit-sticky; /*Safari*/
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    overflow: hidden;
+
+}
+
+.header-bar button {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 9px 18px;
+    text-decoration: none;
+    background-color: transparent;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    margin-top: inherit;
+    font: 400 16px/1.8 "Segoe UI", sans-serif;
+    transition: 0.4s;
+}
+
+.header-bar img {
+	vertical-align: middle;
+	margin-right: 5px;
+}
+
+.header-bar button:hover:not(.header-btn-active) {
+    background-color: #555;
+}
+
+.header-btn-active {
+    background-color: #12ad18!important;
+}
+
+</style>
+
+
+<style type="text/css">
+	/*Background image*/
+	div.background-test {
+		width: 100%;
+		height: 400px;
+		background-image: url("./image/bga.jpg");
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		left: 0px;
+		opacity: 0.85;
+		border: none;
+	    position: absolute;
+	    z-index: -1;
+	}
+
+	div.background-test-padding {
+		padding-top: 400px;
+	}
+
+	div.background-test .background-caption {
+		position: absolute;
+	    left: 0px;
+	    top: 35%;
+	    width: 100%;
+	    text-align: center;
+	}
+
+	div.background-test .background-caption span.border {
+		background-color: #111111bd;
+		color: #fff;
+		padding: 8px;
+		font-size: 25px;
+		letter-spacing: 10px;
+	}
+
+	div.background-test .background-caption span.sub-border {
+		background-color: #111111bd;
+		color: #fff;
+		padding: 5px;
+		font-size: 18px;
+		letter-spacing: 8px;
+	}
+</style>
+
+<style type="text/css">
+	/*Style connect page*/
+
+.btn {
+	color: #fff;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	border: 1px solid #FFFFFF;
+}
+
+.btn-large {
+	cursor: pointer;
+	width: 300px;
+	height: 30px;
+
+	background: #07a9a9;
+}
+
+.btn-normal
+{
+	cursor: pointer;
+	width: 60px;
+	height: 30px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	background: #226bac;
+}
+
+.input
+{
+	height: 24px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.input-message
+{
+	background: #FFFFFF;
+}
+	
+</style>
+</style>
+
+<style type="text/css">
+.main-tab-content {
+    display: none;
+    border: none;
+    border-bottom: 1px solid #ccc;
+}
+
+</style>
+
+
+<script type="text/javascript" src="./js/mqttws31.js"></script>
+<script type="text/javascript">
+	// Sub-function
+	function $(element_id) {
+		return document.getElementById(element_id);
+	}
+	function message_send()
+	{
+		if (MQTT_ON_CONNECTED === true) {
+			var obj = new Object();
+			obj.msg = $('message_text').value;
+			var jsonstring = JSON.stringify(obj);
+			mqtt_push(jsonstring);
+		}
+		else
+		{
+			alert("Network connction is lost. Please reconnect...");
+		}
+
+	}
+
+	function btn_server()
+	{
+		$("btn_connect_server").innerHTML = "Connecting...";
+		$("btn_connect_server").style.backgroundColor = '#555555';
+		client.connect(options);
+	}
+	
+	function esp8266_device()
+	{
+		if (MQTT_ON_CONNECTED === true) {
+			$("btn_connect_esp8266").innerHTML = "Connecting...";
+			$("btn_connect_esp8266").style.backgroundColor = '#555555';
+			console.log("connecting to esp866...");
+		}
+		else
+		{
+			alert("MQTT connection is losted. Please reconnect...");
+		}
+
+	}
+</script>
+<script type="text/javascript">
+	var user_id = "id_" + parseInt(Math.random() * 1000000, 10).toString();
+	var MQTT_ON_CONNECTED = false;
+	client = new Paho.MQTT.Client("m14.cloudmqtt.com", 30982, user_id);
+	client.onConnectionLost = onConnectionLost;
+	client.onMessageArrived = onMessageArrived;
+	var options = {
+		useSSL: true,
+		userName: "lffknbep",
+		password: "a1MJ1J3WSCbm",
+		onSuccess:onConnect,
+		onFailure:onFailed
+	}
+
+	function mqtt_push(mqtt_data)
+	{
+		message = new Paho.MQTT.Message(mqtt_data);
+		message.destinationName = "client_user";
+		client.send(message);
+	}
+
+	function onConnect() {
+		// Once a connection has been made, make a subscription and send a message.
+		console.log("onConnect");
+		client.subscribe("client_user");
+		MQTT_ON_CONNECTED = true;
+
+		var obj = new Object();
+		obj.newconnect = user_id;
+		var jsonstring = JSON.stringify(obj);
+		mqtt_push(jsonstring);
+
+		$("btn_connect_server").style.backgroundColor = '#22ac3c';
+		$("btn_connect_server").innerHTML = "Connected";
+	}
+	//Make connection failed
+	function onFailed(e){
+		MQTT_ON_CONNECTED = false;
+		console.log(e);
+	}
+
+	// called when the client loses its connection
+	function onConnectionLost(responseObject) {
+		if (responseObject.errorCode !== 0) {
+			console.log("onConnectionLost:" + responseObject.errorMessage);
+			$("btn_connect_server").style.backgroundColor = '#bd0000e6';
+			$("btn_connect_server").innerHTML = "Reconnect to MQTT";
+			alert("onConnectionLost: " + responseObject.errorMessage);
+		}
+	}
+  	// called when a message arrives
+	function onMessageArrived(message) {
+	    var today = new Date();
+	    var h = today.getHours();
+	    var m = today.getMinutes();
+	    var s = today.getSeconds();
+	    m = m >= 10 ? m : "0" + m;
+	    s = s >= 10 ? s : "0" + s;
+	    var str = h + ":" + m + ":" + s + " > " + message.payloadString;
+	    $('id_message_arrive').innerHTML += str + "<br>";
+		console.log("onMessageArrived " + str);
+	}
+</script>
+<!--- Body website -->
+<body>
+
+	<div class="header-bar">
+	  <button id="header-home" > <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADRSURBVFhH7ZBtDoMgEEQ9RdND9r69DcjSBwEDKx+G/uElRt0ZZjYcmxmMMS95+F2Ltfbtyr/yyDfjNYRy9/YsXUKKQnlyA2uWkIJrYWmG/Vm0Ik17hJaCFs8QPcE93iZGAkfOFJkJmjnrmQ5wDGcMHyzQnZUegOHygGT8om6WEOFSbpGmIc5TXcIJn8TgQcpAqoItAylmSxdSDkvEK2OcgVQFWwaSILdcLk/BrIbxG2HcdaYK/r3AXmAv8P8FNLBGGKtgvQe/CtYIYxWsm03CcZw7nL7KbJh6LwAAAABJRU5ErkJggg==">Trang chủ</button>
+	  <button id="header-idea" ><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAALFSURBVFhH7Zc/aBRBFMbP4J/YWBkU8dBCIacEuU4QYsQIKoiCYBFBRMTEUhG1sLKIAa1MJwimkQTs7ExjDBiNKCiWEWMRj6iVlVrc+fuWb5fb3B7s3u0FBD/4MfPezHtvd25ndq/wX1lUrVaLtVrtJu0sfIXfsAQv4AYUPTVfUbSb5PfgB9yHw7AN/3q1tsfhG9yFDQ5tXyTrgTmYhC329cFZ0F1f1IXIT7sVewpeQo98qUVAiQRdNgPh2wivYJSxNbRl2ue0C/CA/hitVmQTHIP9nncH5ugHFxYKuwt/yWZcDEzDFxi2Sz4t56SS2j4Ap0O7XvgPQSUcp52iHfOwxkdA+aftahSDZRhyvwjfIVj2NGLuDtirPsX1cyh+u8eGoKx+KpFAT/u4zZakeLhuM5sInOUiBm22JHIcgRmb2URgRctosyWRQ1t0yWaymPCJQoHUt1v+X9DWfla88thsWitRmgC7bLYkxcOCzWwiUAfPiM2Y8H+Afvf74X0wsEL4L8Njm9nEKg0S/JF2rV2RwqJutdWCi6mX4vArPv2DTEB0Dkj0n8FVmw1i7CcctBkT/isQHTr0dXQ3Pwc0GVaehPoNl6HPrpi4u5q7MTF/D+jFtNsu+Yah+UlIrl6IvQskAs6BfvOGHZF0Abj0hnwHF+yKpPzQazO9SPaEwOhcD4W/YSvhuw1PbeYjim8mqT5A9tmVKMZLsMz8tg6wRJH4Gokf2QyEL7YC2A/hls18RWK96So2A3FBsWeA8c8QPXi5SwVTqOHcyE3K7m4gFYOdMADnIXFb5iYVYIknYAa0p/VVrFb2RMcvgCJ/qHEJdMe68263wQpo3FM7Iwq8BX2Cn4FF0Cs7XIF5eOOpnREFTsIid3sKdHKuMwP4tQNOeGrn5IuYp2gk7NerUrxeFNQDqD8m0RfPqorCx7l5/TE5ate/qELhL5YrczOPiY00AAAAAElFTkSuQmCC">Ý tưởng</button>
+	  <button id="header-product" ><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKrSURBVFhHxZdbiE1hGIa3U8ooRnNBGcMoN1MohSanlCg3yCBXanLl0LiaNMkd5UY7xY1yIVGKlBzTmLnQTIlSMpILFE2TUxqHZuzteZfXZFtr79a0Dt56Wv/6vu//1rvW/tdhF6qpVCo1lcvlLdCWBPpsYjvTbeOJSZ0wAl/gQ0K+w3vY4Pa1ReFKGIXtDiUSZz+FXkUYZDzN4WhR1Ain4IFDqYh+dTCKgT1Q73ClKFjvojLb6w6nJtp+cu8hmOVwcGBdHgW/wlM4CSEDzK2HVeTqHBqXZIC5e23iM7yFXTKg3/s4XIAnHlcYYM58YkOePMBmulOxxRwZ2O0eR+AqdMuAVrt+9ysQaYD9/Zr4R+xvdCq2mPa3gRNwE+6puQ74EnSrDMAZ+NfAcvjpybo15zgVWzbQ4R5v4DlsdTo4yBoYcUFoDRBrhcPQ4tC4JAPu/Y7NDIcrRaKBgtAVSEMyQN92trXXD0WhNZCGbGCzd6NFwQrQ6szKwDFY6FClKNCLJ1BWBtx7mM1sh4OzvqyExDjyNkxDtB+7DSXGev7skwGpC85CLgbYdsBFhvdl4AecAz0Y8jKgO60bbsvAQeiD1/ACZCYrA102oHdOD6x1OihYpiIXZLkIdfDoFxr5ySQj34ZJJQP03end6qLo/zyIKJhIwTbQYszKgN66rQ79li/7AjgAuiM+QlYGBkH3v564jUGCQQ/JQIxzexBJ7B9VQoN20EdCXs+BHaBnQa+uwDDod++HvAxcg8dwQwn9e7kEj+AVZPk2LNrALTgPi50O1sIi0CfZN0jdAD31JazPubsw1eGwSB6CZxid4FBi0W+uz3yJQ9VFURPI6WnmLIXmJNBnNfQyfgiTfJjaonAdk3QVEos+uu/vMJzn9vHFpAaIPLO4cPAa/6QKhV/7CUCZik3pJgAAAABJRU5ErkJggg==">Sản phẩm</button>
+	  <button id="header-connect" ><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADFSURBVFhH7ZYNCsMgDIW94Q697ibdNewMfBPKFhJ/AqPzA0Hty/NhCm1avDk6oXwc/JqhfBz83IbIV4AV4IIBWqF8HPyaoTwOzjEPyjnfyngiVxGNaCmzoc4TYEdqIlrKPkFjgrzCthkUma7juQnyCtvjAXrB94IBygvzKGNjqYJvSIC7DJYq+M4P4AXfkBtYLXCBb8gN1BZocwHfkAC1BdpcwPdkzJa5NwV8fyvAN5DND1DaMedz3Esx9f6Q7KKl7O9J6QXiNJP4/EJtHwAAAABJRU5ErkJggg==">Kết nối</button>
+	  <button id="header-control" ><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAOjSURBVFhH7ZZraI5hGMe3mc1ma6wwRrbMNpGiOcxhCkt88MFkhS/OJGSmhTXnHJLmy0pjRlPCtC/LIYdsIayMhJQcojllDgtJm9//dr1strwve4nav37d131d13147vt+7ucJaJMvamhoCKmvrx8jm3IErDZ7Aaw0uxekkxsHQfK1WnS4mc6CrfMa86VBudmaQLbZ4+A0PII3cBLWwADFfRYNMhk02ezLMNrs5Sol7EgzWxTxaJgMO+E+3IFs+u1sKU1FoD0JbqaUS6gXmx0PHSEBZkEBnIF78Ao+w0d4BhqkDDbCJPoIVx8S9VT1Sak2vcz9XTi7w3PoSqL2uy/0hg1wC55ACSwlPp4ygbIztMMOBbVLpsygXEepSWobjsMMCNM4xCJsvJGwgnqw6k44pkBXGATH4AXkQwqJgZbmszQYbadBOWiFVjWaQA/Q5EpdskQwBsd+0NMuAzdrf4i+EuEAeCbitoeykydhqgW3eWb5o4j1hLmwB65CDXwwamhXRVkEC7HjrFkTEUuCQ6AzNNY5Sdae3YUU52gkYuEwn9hF0BkpsfowyhjoIKh3gyEwD/aBZ0KLKZs9EP6J8ADyVFHHSRZzoh4JOaCnLAWd6nYW9ipyg0CHVU+rlc2lHmVhJ+px+N9qsB1QiSMCArHnwFM4CP0sX3l6t3VHFIOeTof0k/HCfNqCTIi2ZmqXqDbKAa2IJheOrYuqQDPRoLtB+3oBLsFANbbYBDiF/ZpS7/ki0HJ3wRciZMNQiymnFk5AupsFwu4PFaBxtKXazq+ragPplZmC7e5xbF251XANZkKoS/ZB9KFzoTbV2FUwyvwaR/s/3TNOiyJhE+iQZJjrt2QDZsBDWG9u7yJZt1i8Vb8JXxqdbqXUUj6G94bsCsXAPW1jEdOVXmtV7yJ5F5yjM72GQdiz4TbcgDx8OuGxEGbEmi8PboJyZ+ELVB/YZyHfuvcuG1QnWgfmCuhgplnYq5RrbfQ1Vfsi+vT5NXbS7GmoG1J3gPsWUEZR1214FHSb1Rmyj4Bi7lOtNqBV0Qfql78lTUQHend1Y76kPEypL1wfbC2v53OtU1+GT6+rtsk/f0USHQ6AOjp1Pyo/E3mDQQezv7laLwbWduwFdzDN3UzEdYVXQqG5/CebRCGch7WgC+qdIVs+3aS7lWvN/CubRC5sh+GgJxapsAVy/tjg/5x4Wv03XjcSzP33xKBZsNjIMvffE4NqBXT4RB9zt+l/U0DAF1BrLseiEnyIAAAAAElFTkSuQmCC">Điều khiển</button>
+	  <button id="header-user" style="float:right;"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKZSURBVFhH7ZbLS1RRHMfHSkkkikBqURFBLQIlWxgt3FSIoUSPhauoVeUiIyIhNEqj6EWLCC1z0cYeRlaLoKwgKCHRntCipX9DrWf8fA9fhyHnmnLPQIFf+HDO73G+5965d85MZkH/pbLZ7DJozOVyhxl3Q5VLpRUbVcMt+MzmlxlPwA34AvvdVhqxwU5vtM+pvMhVwQd4BE1OxxOmrTAK1U4VFfWNfDJDjF1OpRdme+A9xsudKip6dsBa+soZx2CVS+mEUQumE7DCqQzzJeQ3QSMcgxF4Al+pbWE8Awfcnl6YnYSDmC9iPAXf4AFchKPk16uPcQOxHtVxOBQWxxBmTXAJrsFNNlrq0gxRf079HmOzU+mFWT08hVHMy5wuKnr6QO/AVqfSC7M18Av6nUoUPb3wmwtd7VR6Yaiv4R1M9zrWs98eikhzuKC5etQLraEYQ5jVwgvM1zneBitDEWkO9ZqrR71QG4oxhGkZhl0w7FSi1AOdWuNUPGGq86Dc4QxRq2DzcYfxhbnOgMRjltpZaHcYX9zhYjZ4xniesdJpbVwJ3TCsHqdLIzapgR/wCQbgLptOOFfjttKIjfQyXofHjncJzZVTTT2KowvzBngJ9+EhnHZJtQ7ndAipp8Gl9MKsDt7CIDTDa+5SP7m6449mxLmroIvRRb6BOtvMXxjql68HXkH+UGGui9GZMA7f6dPz12Z6NIor3Kd3RWt75BUWz1Us0LPWHZ7T3OkgYv0R1a+i3vwrwv1tmrstyHl5DP3pM6tYpD8afQ4TRY++BQMOE0XPbS4gvKxzEgt0N20OE0WPjt388ex1k2w2/bXsLcj/1S8vLxjE6Mhs0PNTFMR6UcM6xm7GdwX5eV3A5mnTWMjT9gv6l5TJTAGQkHTtahl68wAAAABJRU5ErkJggg==">user.admin</button>
+	</div>
+
+	<div id="home" class="main-tab-content">
+		<div class="background-test">
+		  	<div class="background-caption">
+			    <span class="border">INTERNET</span><br>
+			    <span class="border">OF THINGS 2017</span><br>
+			    <span class="sub-border">Đơn vị: Đại đội 1, Tiểu đoàn 26</span>
+			</div>
+		</div>
+		<div class="background-test-padding"></div>
+		<div style="padding: 25px 25px;">Testing top navigation bar. Scroll-down to see change.</div>
+		<div style="padding: 25px 25px;">Testing top navigation bar. Scroll-down to see change.</div>
+		<div style="padding: 25px 25px;">Testing top navigation bar. Scroll-down to see change.</div>
+		<div style="padding: 25px 25px;">Testing top navigation bar. Scroll-down to see change.</div>
+		<div style="padding: 25px 25px;">Testing top navigation bar. Scroll-down to see change.</div>
+		<div style="padding: 25px 25px;">Testing top navigation bar. Scroll-down to see change.</div>
+		<div style="padding: 25px 25px;">Testing top navigation bar. Scroll-down to see change.</div>
+		<div style="padding: 25px 25px;">Testing top navigation bar. Scroll-down to see change.</div>
+		<div style="padding: 25px 25px;">Testing top navigation bar. Scroll-down to see change.</div>
+		<div style="padding: 25px 25px;">Testing top navigation bar. Scroll-down to see change.</div>
+		<div style="padding: 25px 25px;">Testing top navigation bar. Scroll-down to see change.</div>
+		<div style="padding: 25px 25px;">Testing top navigation bar. Scroll-down to see change.</div>
+		<div style="padding: 25px 25px;">Testing top navigation bar. Scroll-down to see change.</div>
+		<div style="padding: 25px 25px;">Testing top navigation bar. Scroll-down to see change.</div>
+	</div>
+
+	<div id="idea" class="main-tab-content">
+		<div style="padding: 25px 25px;">This is idea page
+			<h1>I. Ý tưởng của nhóm</h1>
+			<p>Help! Trang trình bày nêu ý tưởng, khả năng áp dụng thực tiễn, càng dài càng tốt, hình ảnh minh họa,... Thanks!</p>
+			<h1>II. Tên của nhóm</h1>
+			<p>Có ai có đề xuất nào không?</p>
+			<h1>III. Tên sản phẩm</h1>
+			<p>Cái này quan trọng...</p>
+			<h1>IV. Đề xuất cải tiến website</h1>
+			<p>Đóng góp càng nhiệt tình càng tốt... :D </p>
+		</div>
+	</div>
+
+	<div id="product" class="main-tab-content">
+		<div style="padding: 25px 25px;">This is product page</div>
+		<h2>Chuyên trang giới thiệu sản phẩm</h2>
+		<p>Quay phim, chụp ảnh, tự sướng,...</p>
+		<p>Thuận lợi, khó khăn quá trình hoàn thành sản phẩm,...</p>
+		<p>=> Đúc rút kinh nghiệm </p>
+		<h2>Ưu, nhược điểm của sản phẩm,...</h2>
+		<p>etc... </p>
+		<p>=> Gợi ý thôi! các bác cứ đóng góp ý kiến thoải mái... :D</p>
+	</div>
+
+	<div id="connect" class="main-tab-content">
+		<h1> Demo MQTT Broker connection through WebSocket</h1>
+		<div>
+			<div>Step 1: Connect to MQTT broker server...</div>
+			<button id="btn_connect_server" class="btn btn-large">Connect to MQTT</button>
+		</div>
+
+		<div>
+			<div>Step 2: Connect to ESP8266 device...</div>
+			<button id="btn_connect_esp8266" class="btn btn-large">Connect to ESP8266 device</button>
+		</div>
+
+		<div>
+			<div>Step 3: Finish. Let's control your device.</div>
+			<!--input type="text" id="message_text" required class="input input-message">
+			<button id="btn_messege_send" class="btn btn-normal">Send</button-->	
+		</div>
+
+		<div>
+			<div>Message arrives:</div>
+			<div id="id_message_arrive"></div>
+			<div style="padding-top: 50px;"></div>
+
+		</div>
+
+		<div class="message-body" id="message-body">
+			<div class="msg-content msg-recieve">MSfd ssdfsssssssssgsdfdf sdfg sdfg s<time>2017/05/27 15:21:01</time></div>
+			<div class="msg-content msg-send">MSfd ssdddadafgsdfdf sdfg sdfg s<time>2017/05/27 15:21:01</time></div>
+			<div class="msg-content msg-send">MSfd ssdfgsdfdf sdfg sdfsssssssssssss sssssssssssssssss
+			ssssssssssssss s<time>2017/05/27 15:21:01</time></div>
+			<div class="msg-content msg-recieve">MSfd ssdfgsdfdf sdfg sdfg s<time>2017/05/27 15:21:01</time></div>
+			<div class="msg-content msg-send">MSfd ssdfgsdfdf sdfg sdfg s<time>2017/05/27 15:21:01</time></div>
+			<div class="msg-content msg-send">MSfd ssdfgsdfdf sdfg sdfsssssssssssss sssssssssssssssss
+			ssssssssssssss s<time>2017/05/27 15:21:01</time></div>
+			<div class="msg-content msg-recieve">MSfd ssdfsssssssssgsdfdf sdfg sdfg s<time>2017/05/27 15:21:01</time></div>
+			<div class="msg-content msg-send">MSfd ssdddadafgsdfdf sdfg sdfg s<time>2017/05/27 15:21:01</time></div>
+			<div class="msg-content msg-send">MSfd ssdfgsdfdf sdfg sdfsssssssssssss sssssssssssssssss
+			ssssssssssssss s<time>2017/05/27 15:21:01</time></div>
+			<div class="msg-content msg-recieve">MSfd ssdfgsdfdf sdfg sdfg s<time>2017/05/27 15:21:01</time></div>
+			<div class="msg-content msg-send">MSfd ssdfgsdfdf sdfg sdfg s<time>2017/05/27 15:21:01</time></div>
+			<div class="msg-content msg-send">MSfd ssdfgsdfdf sdfg sdfsssssssssssss sssssssssssssssss
+			ssssssssssssss s<time>2017/05/27 15:21:01</time></div>
+		</div>
+		<div class="message-control">
+			<input type="text" id="message_text"></input>
+			<button id="btn_message_send">Command</button>
+			<script type="text/javascript" src="./js/message.js"></script>
+		</div>
+
+		<script type="text/javascript">
+			// Control Click event listener
+			$("btn_connect_server").onclick = btn_server;
+			$("btn_connect_esp8266").onclick = esp8266_device;
+			//$("btn_messege_send").onclick = message_send;
+		</script>
+	</div>
+
+	<div id="control" class="main-tab-content">
+		<div style="padding: 25px 25px;">This is control page</div>
+		<h1>Trang này sẽ hoàn thiện sau khi có mạch. </h1>
+		<p>Bây giờ chưa biết gì về sản phẩm sẽ như thế nào..?</p>
+	</div>
+
+<script type="text/javascript">
+	function $(eleme) {
+		return document.getElementById(eleme);
+	}
+	set_main_tab_active("home");
+	$("header-home").onclick = function() {
+		set_main_tab_active("home");
+	}
+	$("header-idea").onclick = function() {
+		set_main_tab_active("idea");
+	}
+	$("header-product").onclick = function() {
+		set_main_tab_active("product");
+	}
+	$("header-connect").onclick = function() {
+		set_main_tab_active("connect");
+	}
+	$("header-control").onclick = function() {
+		set_main_tab_active("control");
+	}
+	$("header-user").onclick = function() {
+		set_active_button("header-user");
+		iot_logout();
+		window.location.href = "./login/index.html";
+	}
+	function set_main_tab_active(tabidname) {
+	   	var i, tabcontent, tablinks;
+	    tabcontent = document.getElementsByClassName("main-tab-content");
+	    for (i = 0; i < tabcontent.length; i++) {
+	        tabcontent[i].style.display = "none";
+	    }
+	    document.getElementById(tabidname).style.display = "block";
+	    set_active_button("header-" + tabidname);
+	}
+	function set_active_button(tabidname) {
+		$("header-home").classList.remove("header-btn-active");
+	    $("header-idea").classList.remove("header-btn-active");
+	    $("header-product").classList.remove("header-btn-active");
+	    $("header-connect").classList.remove("header-btn-active");
+	    $("header-control").classList.remove("header-btn-active");
+	    $("header-user").classList.remove("header-btn-active");
+	    $(tabidname).classList.add("header-btn-active");
+	}
+</script>
+</body>
+</html>
