@@ -6,18 +6,16 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" href="./logo/iot_logo.png">
 	<script type="text/javascript" src="./login/iot-user.js"></script>
-	<script type="text/javascript" src="./js/w3.js"></script>
 </head>
 <script type="text/javascript">
 	function iot_onload() {
 	    if (iot_is_login() === false) {
-	        document.write('<div w3-include-html="./login/"></div> ');
+	        window.location.href = "./login/index.html";
 	    }
 	    else
 	    {
-	    	document.write('<div w3-include-html="./main.html"></div>');
+	    	window.location.href = "./main.html";
 	    }
-	    w3.includeHTML();
 	}
 
 	if (window.addEventListener)
