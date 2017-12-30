@@ -81,60 +81,39 @@
 		<div style="padding: 25px 25px;">This is product page</div>
 	</div>
 
-	<div id="connect" class="main-tab-content">
-		<h1> Demo MQTT Broker connection through WebSocket</h1>
+	<div id="connect" class="main-tab-content" style="margin-left: 50px;">
+		<h2> I. Kết nối đến MQTT Broker thông qua WebSocket</h2>
 		<div>
-			<div>Step 1: Connect to MQTT broker server...</div>
+			<div>Bước 1: Kết nối đến MQTT Broker....</div>
 			<button id="btn_connect_server" class="btn btn-large">Connect to MQTT</button>
 		</div>
 
 		<div>
-			<div>Step 2: Connect to ESP8266 device...</div>
+			<div>Bước 2: Kết nối đến thiết bị IoT...</div>
 			<button id="btn_connect_esp8266" class="btn btn-large">Connect to ESP8266 device</button>
 		</div>
 
 		<div>
-			<div>Step 3: Finish. Let's control your device.</div>
-			<!--input type="text" id="message_text" required class="input input-message">
-			<button id="btn_messege_send" class="btn btn-normal">Send</button-->	
+			<div>Bước 3: Hoàn tất. Tiến hành điều khiển thiết bị.</div>
 		</div>
 
-		<div>
-			<div>Message arrives:</div>
-			<div id="id_message_arrive"></div>
-			<div style="padding-top: 50px;"></div>
+		<div style="padding-top: 30px;"></div>
 
-		</div>
 
-		<div class="message-body" id="message-body">
-			<div class="msg-content msg-recieve">MSfd ssdfsssssssssgsdfdf sdfg sdfg s<time>2017/05/27 15:21:01</time></div>
-			<div class="msg-content msg-send">MSfd ssdddadafgsdfdf sdfg sdfg s<time>2017/05/27 15:21:01</time></div>
-			<div class="msg-content msg-send">MSfd ssdfgsdfdf sdfg sdfsssssssssssss sssssssssssssssss
-			ssssssssssssss s<time>2017/05/27 15:21:01</time></div>
-			<div class="msg-content msg-recieve">MSfd ssdfgsdfdf sdfg sdfg s<time>2017/05/27 15:21:01</time></div>
-			<div class="msg-content msg-send">MSfd ssdfgsdfdf sdfg sdfg s<time>2017/05/27 15:21:01</time></div>
-			<div class="msg-content msg-send">MSfd ssdfgsdfdf sdfg sdfsssssssssssss sssssssssssssssss
-			ssssssssssssss s<time>2017/05/27 15:21:01</time></div>
-			<div class="msg-content msg-recieve">MSfd ssdfsssssssssgsdfdf sdfg sdfg s<time>2017/05/27 15:21:01</time></div>
-			<div class="msg-content msg-send">MSfd ssdddadafgsdfdf sdfg sdfg s<time>2017/05/27 15:21:01</time></div>
-			<div class="msg-content msg-send">MSfd ssdfgsdfdf sdfg sdfsssssssssssss sssssssssssssssss
-			ssssssssssssss s<time>2017/05/27 15:21:01</time></div>
-			<div class="msg-content msg-recieve">MSfd ssdfgsdfdf sdfg sdfg s<time>2017/05/27 15:21:01</time></div>
-			<div class="msg-content msg-send">MSfd ssdfgsdfdf sdfg sdfg s<time>2017/05/27 15:21:01</time></div>
-			<div class="msg-content msg-send">MSfd ssdfgsdfdf sdfg sdfsssssssssssss sssssssssssssssss
-			ssssssssssssss s<time>2017/05/27 15:21:01</time></div>
-		</div>
+		<h2> II. Bảng hoạt động của thiết bị</h2>
+		<div class="message-body" id="message-body"></div>
 		<div class="message-control">
 			<input type="text" id="message_text"></input>
 			<button id="btn_message_send">Command</button>
 			<script type="text/javascript" src="./js/message.js"></script>
 		</div>
 
+		<div style="padding-bottom: 100px;"></div>
 		<script type="text/javascript">
 			// Control Click event listener
 			$("btn_connect_server").onclick = btn_server;
 			$("btn_connect_esp8266").onclick = esp8266_device;
-			//$("btn_messege_send").onclick = message_send;
+			$("btn_message_send").onclick = message_send;
 		</script>
 	</div>
 

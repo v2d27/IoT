@@ -117,17 +117,26 @@ div.background-test .background-caption span.sub-border {
     color: #fff;
     margin-top: 5px;
     margin-bottom: 5px;
-    border: 1px solid #FFFFFF;
+    display: inline-block;
+    cursor: pointer;
+    /*Tắt border cho button*/
+    outline: none;
+    border: none;
 }
 
 .btn-large {
-    cursor: pointer;
     width: 300px;
     height: 30px;
-
-    background: #07a9a9;
+    border-left-color: #4caF50;
+    border-left-style: solid;
+    border-left-color: coral;
+    background: #2f91b7;
 }
 
+
+.btn-large:hover {
+    background: #2d80a0;
+}
 .btn-normal
 {
     cursor: pointer;
