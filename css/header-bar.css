@@ -1,0 +1,152 @@
+
+/* HEADER BAR  ========================================================*/
+.header-bar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    /*Fix top*/
+    position: sticky!important;
+    position: -webkit-sticky; /*Safari*/
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    overflow: hidden;
+
+}
+
+.header-bar button {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 9px 18px;
+    text-decoration: none;
+    background-color: transparent;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    margin-top: inherit;
+    font: 400 16px/1.8 "Segoe UI", sans-serif;
+    transition: 0.4s;
+}
+
+.header-bar img {
+	vertical-align: middle;
+	margin-right: 5px;
+}
+
+.header-bar button:hover:not(.header-btn-active) {
+    background-color: #555;
+}
+
+.header-btn-active {
+    background-color: #12ad18!important;
+}
+
+/*tab of header content*/
+.main-tab-content {
+    display: none;
+    border: none;
+    border-bottom: 1px solid #ccc;
+}
+/* END HEADER BAR  ========================================================*/
+
+
+
+
+
+
+
+
+
+/* HOME PAGE ========================================================*/
+/*Background image*/
+div.background-test {
+    width: 100%;
+    height: 400px;
+    background-image: url("../image/bga.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    left: 0px;
+    opacity: 0.85;
+    border: none;
+    position: absolute;
+    z-index: -1;
+}
+
+div.background-test-padding {
+    padding-top: 400px;
+}
+
+div.background-test .background-caption {
+    position: absolute;
+    left: 0px;
+    top: 35%;
+    width: 100%;
+    text-align: center;
+}
+
+div.background-test .background-caption span.border {
+    background-color: #111111bd;
+    color: #fff;
+    padding: 8px;
+    font-size: 25px;
+    letter-spacing: 10px;
+}
+
+div.background-test .background-caption span.sub-border {
+    background-color: #111111bd;
+    color: #fff;
+    padding: 5px;
+    font-size: 18px;
+    letter-spacing: 8px;
+}
+/* END HOME PAGE ========================================================*/
+
+
+
+
+
+
+
+/* CONNECT TAB  ========================================================*/
+.btn {
+    color: #fff;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: 1px solid #FFFFFF;
+}
+
+.btn-large {
+    cursor: pointer;
+    width: 300px;
+    height: 30px;
+
+    background: #07a9a9;
+}
+
+.btn-normal
+{
+    cursor: pointer;
+    width: 60px;
+    height: 30px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background: #226bac;
+}
+
+.input
+{
+    height: 24px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.input-message
+{
+    background: #FFFFFF;
+}
+/* END CONNECT TAB  ========================================================*/

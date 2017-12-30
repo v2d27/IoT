@@ -6,283 +6,48 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" href="./logo/iot_logo.png">
 	<script type="text/javascript" src="./login/iot-user.js"></script>
+	<script type="text/javascript" src="./js/mqttws31.js"></script>
+	<script type="text/javascript" src="./js/connect-event.js"></script>
+
 	<link rel="stylesheet" type="text/css" href="./css/message.css">
+	<link rel="stylesheet" type="text/css" href="./css/header-bar.css">
 </head>
+
+
 <script type="text/javascript">
-function iot_onload() {
-	return ;
-    if (iot_is_login() === false) {
-        window.location.href = "./login/index.html";
-    }
-}
-if (window.addEventListener)
-    window.addEventListener("load", iot_onload, false);
-else if (window.attachEvent)
-    window.attachEvent("onload", iot_onload);
-else window.onload = iot_onload;
+	function iot_onload() {
+		return ;
+	    if (iot_is_login() === false) {
+	        window.location.href = "./login/index.html";
+	    }
+	}
+
+	if (window.addEventListener)
+	{
+	    window.addEventListener("load", iot_onload, false);
+	}
+	else if (window.attachEvent)
+	{
+	    window.attachEvent("onload", iot_onload);
+	}
+	else 
+	{
+		window.onload = iot_onload;
+	}
+
 </script>
 
-<style type="text/css"> /*header-bar creating object*/
-body, html {
-  /*height: 100%;*/
-  margin: 0;
-  font: 400 15px/1.8 "Lato", sans-serif;
-  color: #777;
-  -webkit-text-size-adjust:none;
-}
-
-.header-bar {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-
-    /*Fix top*/
-    position: sticky!important;
-    position: -webkit-sticky; /*Safari*/
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    overflow: hidden;
-
-}
-
-.header-bar button {
-    float: left;
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 9px 18px;
-    text-decoration: none;
-    background-color: transparent;
-    cursor: pointer;
-    outline: none;
-    border: none;
-    margin-top: inherit;
-    font: 400 16px/1.8 "Segoe UI", sans-serif;
-    transition: 0.4s;
-}
-
-.header-bar img {
-	vertical-align: middle;
-	margin-right: 5px;
-}
-
-.header-bar button:hover:not(.header-btn-active) {
-    background-color: #555;
-}
-
-.header-btn-active {
-    background-color: #12ad18!important;
-}
-
-</style>
-
-
 <style type="text/css">
-	/*Background image*/
-	div.background-test {
-		width: 100%;
-		height: 400px;
-		background-image: url("./image/bga.jpg");
-		background-position: center;
-		background-repeat: no-repeat;
-		background-size: cover;
-		left: 0px;
-		opacity: 0.85;
-		border: none;
-	    position: absolute;
-	    z-index: -1;
-	}
-
-	div.background-test-padding {
-		padding-top: 400px;
-	}
-
-	div.background-test .background-caption {
-		position: absolute;
-	    left: 0px;
-	    top: 35%;
-	    width: 100%;
-	    text-align: center;
-	}
-
-	div.background-test .background-caption span.border {
-		background-color: #111111bd;
-		color: #fff;
-		padding: 8px;
-		font-size: 25px;
-		letter-spacing: 10px;
-	}
-
-	div.background-test .background-caption span.sub-border {
-		background-color: #111111bd;
-		color: #fff;
-		padding: 5px;
-		font-size: 18px;
-		letter-spacing: 8px;
+	body, html {
+	  /*height: 100%;*/
+	  margin: 0;
+	  font: 400 15px/1.8 "Lato", sans-serif;
+	  color: #777;
+	  -webkit-text-size-adjust:none;
 	}
 </style>
 
-<style type="text/css">
-	/*Style connect page*/
 
-.btn {
-	color: #fff;
-	margin-top: 5px;
-	margin-bottom: 5px;
-	border: 1px solid #FFFFFF;
-}
-
-.btn-large {
-	cursor: pointer;
-	width: 300px;
-	height: 30px;
-
-	background: #07a9a9;
-}
-
-.btn-normal
-{
-	cursor: pointer;
-	width: 60px;
-	height: 30px;
-	margin-top: 5px;
-	margin-bottom: 5px;
-	background: #226bac;
-}
-
-.input
-{
-	height: 24px;
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
-
-.input-message
-{
-	background: #FFFFFF;
-}
-	
-</style>
-</style>
-
-<style type="text/css">
-.main-tab-content {
-    display: none;
-    border: none;
-    border-bottom: 1px solid #ccc;
-}
-
-</style>
-
-
-<script type="text/javascript" src="./js/mqttws31.js"></script>
-<script type="text/javascript">
-	// Sub-function
-	function $(element_id) {
-		return document.getElementById(element_id);
-	}
-	function message_send()
-	{
-		if (MQTT_ON_CONNECTED === true) {
-			var obj = new Object();
-			obj.msg = $('message_text').value;
-			var jsonstring = JSON.stringify(obj);
-			mqtt_push(jsonstring);
-		}
-		else
-		{
-			alert("Network connction is lost. Please reconnect...");
-		}
-
-	}
-
-	function btn_server()
-	{
-		$("btn_connect_server").innerHTML = "Connecting...";
-		$("btn_connect_server").style.backgroundColor = '#555555';
-		client.connect(options);
-	}
-	
-	function esp8266_device()
-	{
-		if (MQTT_ON_CONNECTED === true) {
-			$("btn_connect_esp8266").innerHTML = "Connecting...";
-			$("btn_connect_esp8266").style.backgroundColor = '#555555';
-			console.log("connecting to esp866...");
-		}
-		else
-		{
-			alert("MQTT connection is losted. Please reconnect...");
-		}
-
-	}
-</script>
-<script type="text/javascript">
-	var user_id = "id_" + parseInt(Math.random() * 1000000, 10).toString();
-	var MQTT_ON_CONNECTED = false;
-	client = new Paho.MQTT.Client("m14.cloudmqtt.com", 30982, user_id);
-	client.onConnectionLost = onConnectionLost;
-	client.onMessageArrived = onMessageArrived;
-	var options = {
-		useSSL: true,
-		userName: "lffknbep",
-		password: "a1MJ1J3WSCbm",
-		onSuccess:onConnect,
-		onFailure:onFailed
-	}
-
-	function mqtt_push(mqtt_data)
-	{
-		message = new Paho.MQTT.Message(mqtt_data);
-		message.destinationName = "client_user";
-		client.send(message);
-	}
-
-	function onConnect() {
-		// Once a connection has been made, make a subscription and send a message.
-		console.log("onConnect");
-		client.subscribe("client_user");
-		MQTT_ON_CONNECTED = true;
-
-		var obj = new Object();
-		obj.newconnect = user_id;
-		var jsonstring = JSON.stringify(obj);
-		mqtt_push(jsonstring);
-
-		$("btn_connect_server").style.backgroundColor = '#22ac3c';
-		$("btn_connect_server").innerHTML = "Connected";
-	}
-	//Make connection failed
-	function onFailed(e){
-		MQTT_ON_CONNECTED = false;
-		console.log(e);
-	}
-
-	// called when the client loses its connection
-	function onConnectionLost(responseObject) {
-		if (responseObject.errorCode !== 0) {
-			console.log("onConnectionLost:" + responseObject.errorMessage);
-			$("btn_connect_server").style.backgroundColor = '#bd0000e6';
-			$("btn_connect_server").innerHTML = "Reconnect to MQTT";
-			alert("onConnectionLost: " + responseObject.errorMessage);
-		}
-	}
-  	// called when a message arrives
-	function onMessageArrived(message) {
-	    var today = new Date();
-	    var h = today.getHours();
-	    var m = today.getMinutes();
-	    var s = today.getSeconds();
-	    m = m >= 10 ? m : "0" + m;
-	    s = s >= 10 ? s : "0" + s;
-	    var str = h + ":" + m + ":" + s + " > " + message.payloadString;
-	    $('id_message_arrive').innerHTML += str + "<br>";
-		console.log("onMessageArrived " + str);
-	}
-</script>
 <!--- Body website -->
 <body>
 
@@ -323,25 +88,16 @@ body, html {
 	<div id="idea" class="main-tab-content">
 		<div style="padding: 25px 25px;">This is idea page
 			<h1>I. Ý tưởng của nhóm</h1>
-			<p>Help! Trang trình bày nêu ý tưởng, khả năng áp dụng thực tiễn, càng dài càng tốt, hình ảnh minh họa,... Thanks!</p>
 			<h1>II. Tên của nhóm</h1>
-			<p>Có ai có đề xuất nào không?</p>
 			<h1>III. Tên sản phẩm</h1>
-			<p>Cái này quan trọng...</p>
 			<h1>IV. Đề xuất cải tiến website</h1>
-			<p>Đóng góp càng nhiệt tình càng tốt... :D </p>
 		</div>
 	</div>
 
 	<div id="product" class="main-tab-content">
 		<div style="padding: 25px 25px;">This is product page</div>
-		<h2>Chuyên trang giới thiệu sản phẩm</h2>
-		<p>Quay phim, chụp ảnh, tự sướng,...</p>
-		<p>Thuận lợi, khó khăn quá trình hoàn thành sản phẩm,...</p>
 		<p>=> Đúc rút kinh nghiệm </p>
 		<h2>Ưu, nhược điểm của sản phẩm,...</h2>
-		<p>etc... </p>
-		<p>=> Gợi ý thôi! các bác cứ đóng góp ý kiến thoải mái... :D</p>
 	</div>
 
 	<div id="connect" class="main-tab-content">
@@ -406,50 +162,9 @@ body, html {
 		<h1>Trang này sẽ hoàn thiện sau khi có mạch. </h1>
 		<p>Bây giờ chưa biết gì về sản phẩm sẽ như thế nào..?</p>
 	</div>
+	
+	<!-- register event -->
+	<script type="text/javascript" src="./js/header-event.js"></script>
 
-<script type="text/javascript">
-	function $(eleme) {
-		return document.getElementById(eleme);
-	}
-	set_main_tab_active("home");
-	$("header-home").onclick = function() {
-		set_main_tab_active("home");
-	}
-	$("header-idea").onclick = function() {
-		set_main_tab_active("idea");
-	}
-	$("header-product").onclick = function() {
-		set_main_tab_active("product");
-	}
-	$("header-connect").onclick = function() {
-		set_main_tab_active("connect");
-	}
-	$("header-control").onclick = function() {
-		set_main_tab_active("control");
-	}
-	$("header-user").onclick = function() {
-		set_active_button("header-user");
-		iot_logout();
-		window.location.href = "./login/index.html";
-	}
-	function set_main_tab_active(tabidname) {
-	   	var i, tabcontent, tablinks;
-	    tabcontent = document.getElementsByClassName("main-tab-content");
-	    for (i = 0; i < tabcontent.length; i++) {
-	        tabcontent[i].style.display = "none";
-	    }
-	    document.getElementById(tabidname).style.display = "block";
-	    set_active_button("header-" + tabidname);
-	}
-	function set_active_button(tabidname) {
-		$("header-home").classList.remove("header-btn-active");
-	    $("header-idea").classList.remove("header-btn-active");
-	    $("header-product").classList.remove("header-btn-active");
-	    $("header-connect").classList.remove("header-btn-active");
-	    $("header-control").classList.remove("header-btn-active");
-	    $("header-user").classList.remove("header-btn-active");
-	    $(tabidname).classList.add("header-btn-active");
-	}
-</script>
 </body>
 </html>
