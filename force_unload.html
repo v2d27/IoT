@@ -4,14 +4,31 @@
 	<title></title>
 </head>
 <body>
-	HTML PAGE
+	<p>Enter message below:</p>
+	<br>
+	<input type="text" name="message">
 </body>
 </html>
 
 <script type="text/javascript">
-	function UnLoadWindow() {
-    return 'We strongly recommends NOT closing this window yet.';
-}
 
-window.onbeforeunload = UnLoadWindow;
-</script>>
+	function unload_show_confirm()
+	{
+		if(confirm("You may be lost control data if you disconnect this page. Do you want to continue?") === false) {
+			console.log("reloading....");
+		}
+		else
+		{
+			console.log("cancelled!");
+		}
+	}
+
+	function UnLoadWindow() {
+		//window.stop();
+		setTimeout(unload_show_confirm, 100);
+    	return '';
+	}
+
+	window.onbeforeunload = UnLoadWindow;
+
+</script>
