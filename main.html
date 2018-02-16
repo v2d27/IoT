@@ -51,7 +51,14 @@
 
 <!--- Body website -->
 <body>
-
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.12&appId=280256195786686&autoLogAppEvents=1';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 	<div class="header-bar">
 	  <button id="header-home" > <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADRSURBVFhH7ZBtDoMgEEQ9RdND9r69DcjSBwEDKx+G/uElRt0ZZjYcmxmMMS95+F2Ltfbtyr/yyDfjNYRy9/YsXUKKQnlyA2uWkIJrYWmG/Vm0Ik17hJaCFs8QPcE93iZGAkfOFJkJmjnrmQ5wDGcMHyzQnZUegOHygGT8om6WEOFSbpGmIc5TXcIJn8TgQcpAqoItAylmSxdSDkvEK2OcgVQFWwaSILdcLk/BrIbxG2HcdaYK/r3AXmAv8P8FNLBGGKtgvQe/CtYIYxWsm03CcZw7nL7KbJh6LwAAAABJRU5ErkJggg==">Trang chủ</button>
 	  <button id="header-idea" ><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAALFSURBVFhH7Zc/aBRBFMbP4J/YWBkU8dBCIacEuU4QYsQIKoiCYBFBRMTEUhG1sLKIAa1MJwimkQTs7ExjDBiNKCiWEWMRj6iVlVrc+fuWb5fb3B7s3u0FBD/4MfPezHtvd25ndq/wX1lUrVaLtVrtJu0sfIXfsAQv4AYUPTVfUbSb5PfgB9yHw7AN/3q1tsfhG9yFDQ5tXyTrgTmYhC329cFZ0F1f1IXIT7sVewpeQo98qUVAiQRdNgPh2wivYJSxNbRl2ue0C/CA/hitVmQTHIP9nncH5ugHFxYKuwt/yWZcDEzDFxi2Sz4t56SS2j4Ap0O7XvgPQSUcp52iHfOwxkdA+aftahSDZRhyvwjfIVj2NGLuDtirPsX1cyh+u8eGoKx+KpFAT/u4zZakeLhuM5sInOUiBm22JHIcgRmb2URgRctosyWRQ1t0yWaymPCJQoHUt1v+X9DWfla88thsWitRmgC7bLYkxcOCzWwiUAfPiM2Y8H+Afvf74X0wsEL4L8Njm9nEKg0S/JF2rV2RwqJutdWCi6mX4vArPv2DTEB0Dkj0n8FVmw1i7CcctBkT/isQHTr0dXQ3Pwc0GVaehPoNl6HPrpi4u5q7MTF/D+jFtNsu+Yah+UlIrl6IvQskAs6BfvOGHZF0Abj0hnwHF+yKpPzQazO9SPaEwOhcD4W/YSvhuw1PbeYjim8mqT5A9tmVKMZLsMz8tg6wRJH4Gokf2QyEL7YC2A/hls18RWK96So2A3FBsWeA8c8QPXi5SwVTqOHcyE3K7m4gFYOdMADnIXFb5iYVYIknYAa0p/VVrFb2RMcvgCJ/qHEJdMe68263wQpo3FM7Iwq8BX2Cn4FF0Cs7XIF5eOOpnREFTsIid3sKdHKuMwP4tQNOeGrn5IuYp2gk7NerUrxeFNQDqD8m0RfPqorCx7l5/TE5ate/qELhL5YrczOPiY00AAAAAElFTkSuQmCC">Ý tưởng</button>
@@ -206,6 +213,6 @@
 	
 	<!-- register event -->
 	<script type="text/javascript" src="./js/header-event.js"></script>
-
+<div class="fb-comments" data-href="https://hercules2404.github.io/IoT" data-numposts="5"></div>
 </body>
 </html>
