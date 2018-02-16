@@ -11,6 +11,7 @@
 
 	<link rel="stylesheet" type="text/css" href="./css/message.css">
 	<link rel="stylesheet" type="text/css" href="./css/header-bar.css">
+	<link rel="stylesheet" type="text/css" href="./css/table-control.css">
 </head>
 
 
@@ -60,11 +61,12 @@
 	  <button id="header-user" style="float:right;"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKZSURBVFhH7ZbLS1RRHMfHSkkkikBqURFBLQIlWxgt3FSIoUSPhauoVeUiIyIhNEqj6EWLCC1z0cYeRlaLoKwgKCHRntCipX9DrWf8fA9fhyHnmnLPQIFf+HDO73G+5965d85MZkH/pbLZ7DJozOVyhxl3Q5VLpRUbVcMt+MzmlxlPwA34AvvdVhqxwU5vtM+pvMhVwQd4BE1OxxOmrTAK1U4VFfWNfDJDjF1OpRdme+A9xsudKip6dsBa+soZx2CVS+mEUQumE7DCqQzzJeQ3QSMcgxF4Al+pbWE8Awfcnl6YnYSDmC9iPAXf4AFchKPk16uPcQOxHtVxOBQWxxBmTXAJrsFNNlrq0gxRf079HmOzU+mFWT08hVHMy5wuKnr6QO/AVqfSC7M18Av6nUoUPb3wmwtd7VR6Yaiv4R1M9zrWs98eikhzuKC5etQLraEYQ5jVwgvM1zneBitDEWkO9ZqrR71QG4oxhGkZhl0w7FSi1AOdWuNUPGGq86Dc4QxRq2DzcYfxhbnOgMRjltpZaHcYX9zhYjZ4xniesdJpbVwJ3TCsHqdLIzapgR/wCQbgLptOOFfjttKIjfQyXofHjncJzZVTTT2KowvzBngJ9+EhnHZJtQ7ndAipp8Gl9MKsDt7CIDTDa+5SP7m6449mxLmroIvRRb6BOtvMXxjql68HXkH+UGGui9GZMA7f6dPz12Z6NIor3Kd3RWt75BUWz1Us0LPWHZ7T3OkgYv0R1a+i3vwrwv1tmrstyHl5DP3pM6tYpD8afQ4TRY++BQMOE0XPbS4gvKxzEgt0N20OE0WPjt388ex1k2w2/bXsLcj/1S8vLxjE6Mhs0PNTFMR6UcM6xm7GdwX5eV3A5mnTWMjT9gv6l5TJTAGQkHTtahl68wAAAABJRU5ErkJggg==">user.admin</button>
 	</div>
 
+	<!--- home Tab -->
 	<div id="home" class="main-tab-content">
 		<div class="background-test">
 		  	<div class="background-caption">
 			    <span class="border">INTERNET</span><br>
-			    <span class="border">OF THINGS 2017</span><br>
+			    <span class="border">OF THINGS 2018</span><br>
 			    <span class="sub-border">Đơn vị: Đại đội 1, Tiểu đoàn 26</span>
 			</div>
 		</div>
@@ -72,16 +74,19 @@
 		<div style="padding: 25px 25px;">This is main page.</div>
 	</div>
 
+	<!--- Idea Tab -->
 	<div id="idea" class="main-tab-content">
 		<div style="padding: 25px 25px;">This is idea page
 		</div>
 	</div>
 
+	<!--- Product Tab -->
 	<div id="product" class="main-tab-content">
 		<div style="padding: 25px 25px;"></div>
 		<div align="center" style="margin-bottom: 20px">Source of IoT project is available on <a href="https://github.com/Hercules2404/IoT">GitHub</a>.</div>
 	</div>
 
+	<!--- CONNECT Tab -->
 	<div id="connect" class="main-tab-content" style="margin-left: 50px;">
 		<h2> I. Kết nối đến MQTT Broker thông qua WebSocket</h2>
 		<div>
@@ -118,8 +123,85 @@
 		</script>
 	</div>
 
+	<!--- Control Tab -->
 	<div id="control" class="main-tab-content">
-		<div style="padding: 25px 25px;">This is control page</div>
+		<div class="table-control">
+		  <table align="center">
+		    <caption>Bảng điểu khiển</caption>
+		  <tr>
+		    <th width="10%">STT</th>
+		    <th width="40%">Tên thiết bị</th>
+		    <th width="20%">Trạng thái</th>
+		    <th width="30%">Ghi chú</th>
+		  </tr>
+		  <tr>
+		    <td>1</td>
+		    <td>Maria Anders</td>
+		    <td>
+		      <div class="slider">
+		        <input type="checkbox" id="slider_1" onclick="slider(1)">
+		        <label for="slider_1">
+		      </div>
+		    </td>
+		    <td>...</td>
+		  </tr>
+		  <tr>
+		    <td>2</td>
+		    <td>Francisco Chang</td>
+		    <td>
+		      <div class="slider">
+		        <input type="checkbox" id="slider_2" onclick="slider(2)">
+		        <label for="slider_2">
+		      </div>
+		    </td>
+		    <td>...</td>
+		  </tr>
+		  <tr>
+		    <td>3</td>
+		    <td>Roland Mendel</td>
+		    <td>
+		      <div class="slider">
+		        <input type="checkbox" id="slider_3" onclick="slider(3)">
+		        <label for="slider_3">
+		      </div>
+		    </td>
+		    <td>...</td>
+		  </tr>
+		  <tr>
+		    <td>4</td>
+		    <td>Helen Bennett</td>
+		    <td>
+		      <div class="slider">
+		        <input type="checkbox" id="slider_4" onclick="slider(4)">
+		        <label for="slider_4">
+		      </div>
+		    </td>
+		    <td>...</td>
+		  </tr>
+		  <tr>
+		    <td>5</td>
+		    <td>Yoshi Tannamuri</td>
+		    <td>
+		      <div class="slider">
+		        <input type="checkbox" id="slider_5" onclick="slider(5)">
+		        <label for="slider_5">
+		      </div>
+		    </td>
+		    <td>...</td>
+		  </tr>
+		  <tr>
+		    <td>6</td>
+		    <td>Giovanni Rovelli</td>
+		    <td>
+		      <div class="slider">
+		        <input type="checkbox" id="slider_6" onclick="slider(6)">
+		        <label for="slider_6">
+		      </div>
+		    </td>
+		    <td>...</td>
+		  </tr>
+		</table>
+		</div>
 	</div>
 	
 	<!-- register event -->
