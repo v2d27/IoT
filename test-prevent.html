@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Clint Bray : LockNav jQuery Plugin</title>
+<link type="text/css" href="LockNav.css" rel="stylesheet" />
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="jquery.lockNav.js"></script>
+
+<script  type="text/javascript">
+$(function(){
+		try {
+	
+			var oLockNav = $.lockNav({WarnBeforeUnload:false});
+			var oBtn_toggle_F5 = $('#oBtn_toggle_F5');
+			var oBtn_toggle_warning = $('#oBtn_toggle_warning');
+			var oWarningMessage = $('#oWarningMessage');
+	
+			oBtn_toggle_F5.click(function(){
+				try {
+					if(oLockNav.settings.DisableF5 == true) {
+						$(this).val('Disable F5');
+						oLockNav.settings.DisableF5 = false;
+					} else {
+						$(this).val('Enable F5');
+						oLockNav.settings.DisableF5 = true;
+					}		
+					
+					LOG_ADD('value for DisableF5 setting now: ' + oLockNav.settings.DisableF5);
+							
+				} catch (E) {
+					LOG_ADD('ERROR: oBtn_toggle_F5.click(): ' + E);
+				}
+			});
+	
+			oBtn_toggle_warning.click(function(){
+				try {
+					if(oLockNav.settings.WarnBeforeUnload == true) {
+						$(this).val('Enable Warning');
+						oLockNav.settings.WarnBeforeUnload = false;
+					} else {
+						$(this).val('Disable Warning');
+						oLockNav.settings.WarnBeforeUnload = true;
+					}
+					
+					LOG_ADD('value for WarnBeforeUnload setting now: ' + oLockNav.settings.WarnBeforeUnload);
+				} catch (E) {
+					LOG_ADD('ERROR: oBtn_toggle_warning.click(): ' + E);
+				}
+			});
+	
+			oWarningMessage.keyup(function(){
+				oLockNav.settings.WarningMessage = oWarningMessage.val();
+			});
+			if (oLockNav.settings.DisableF5 == false)        oBtn_toggle_F5.val('Disable F5');
+			if (oLockNav.settings.WarnBeforeUnload == false) oBtn_toggle_warning.val('Enable Warning');
+	
+			oWarningMessage.val(oLockNav.settings.WarningMessage);
+	
+		} catch (E) {
+			LOG_ADD('ERROR: ' + E);
+		}
+});
+function listAndDisplayProperties(o) {
+    var s = '';
+    try {
+        for (var prop in o) {
+            if (o.hasOwnProperty(prop)) {
+                s += 'key: ' + prop + '\n';
+                s += 'value: ' + o[prop] + '\n\n';
+            }
+        }
+        LOG_ADD('<DIV class="preStuff">' + s.replace(/\n/gi, '<br/>') + '</DIV>');
+    } catch (E) {
+        LOG_ADD('ERROR: listAndDisplayProperties(): ' + E);
+    }
+}
+function LOG_ADD(s) {
+	try {
+		$('.logger').prepend($('<div class="logItem"/>').html(s));
+	} catch (E) {
+		
+	}
+}
+	
+</script>
+
+
+</head>
+
+<body>
+<DIV>
+
+<DIV class="pageContent">
+   <h2>Testing 'LockNav' jQuery Plugin...</h2>
+   
+   <div style="padding:20px;">
+
+   	
+   	<p>Click this button to toggle between enabling/disabling the F5 key which is a short-key for refreshing the browser.</p>
+   	<p><input type="button" id="oBtn_toggle_F5" value="Enable F5"/></p>
+ <div>&nbsp;</div>
+  	
+   	<p>Click this button to toggle between enabling/disabling the warning message the end user has to see if they try to click the browser's refresh or back buttons.</p>
+   	<p><input type="button" id="oBtn_toggle_warning" value="Disable Warning"/></p>
+<div>&nbsp;</div>
+   	
+   	
+    <p>
+    	This is the custom message the end user will see if the navigation warning is enabled:<br/>
+    	<textarea type="button" id="oWarningMessage" style="width:100%;height:150px;"> </textarea></p>
+   	
+   	
+   	</div>
+   
+
+
+
+
+
+
+Error log:<br/>
+<div class="logger">&nbsp;</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+
+</DIV>
+
+
+
+
+</DIV>
+
+
+</body>
+
+</html>
