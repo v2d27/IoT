@@ -1,0 +1,57 @@
+ 
+body
+{
+	width:auto;
+	height:auto;
+	padding:20px;
+	
+	background: rgba(212,228,239,1);
+	background: -moz-linear-gradient(left, rgba(212,228,239,1) 0%, rgba(51,54,56,1) 100%);
+	background: -webkit-gradient(left top, right top, color-stop(0%, rgba(212,228,239,1)), color-stop(100%, rgba(51,54,56,1)));
+	background: -webkit-linear-gradient(left, rgba(212,228,239,1) 0%, rgba(51,54,56,1) 100%);
+	background: -o-linear-gradient(left, rgba(212,228,239,1) 0%, rgba(51,54,56,1) 100%);
+	background: -ms-linear-gradient(left, rgba(212,228,239,1) 0%, rgba(51,54,56,1) 100%);
+	background: linear-gradient(to right, rgba(212,228,239,1) 0%, rgba(51,54,56,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4e4ef', endColorstr='#333638', GradientType=1 );	
+
+}
+
+body, .pageContent td {
+	font-family: Arial,Helvetica,sans-serif !important;
+	font-size:10pt;
+}
+
+A:link {color: #425E8D;  text-decoration:underline;}
+A:visited { color: #425E8D; text-decoration:underline;}
+A:active { color: #425E8D; text-decoration:underline;}
+A:hover { color: red;}
+
+
+.logger {	background:#ffffff;	border:1px dotted #000000; padding:5px;	}
+.logItem { border-bottom:1px dotted red; padding:5px;	}
+.preStuff {	font-family:courier new !important;	}
+	
+.pageContent {
+	max-width:700px;
+	min-width:450px;
+	display:inline-block;
+	border-radius:10px;
+	box-shadow: 3px 3px 20px  rgba(100,100,100,1) inset;
+	padding:10px;
+	margin-top:10px;
+	background-color:#f0f0f0;
+}
+	
+.pageContent h2  {
+	font-family:Georgia, serif !important;
+	font-size:19px !important;
+	font-weight:normal;
+	border-bottom:1px dotted gray;
+	color:#000000;
+}
+	
+INPUT[type="button"] {
+	width:200px;
+}
+	
+	
