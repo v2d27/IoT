@@ -1,0 +1,50 @@
+.link-effect a {
+	position: relative;
+	outline: none;
+	text-decoration: none;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: 400;
+	text-shadow: 0 0 3px rgba(255,255,255,0.5);
+	font-size: 14px;
+	
+	
+	background: transparent;
+	color: #435a6b;
+	font-family: 'Tahoma', sans-serif;
+	display: inline-block;
+}
+
+.link-effect a::before,
+.link-effect a::after {
+	display: inline-block;
+	opacity: 0;
+	-webkit-transition: -webkit-transform 0.3s, opacity 0.2s;
+	-moz-transition: -moz-transform 0.3s, opacity 0.2s;
+	transition: transform 0.3s, opacity 0.2s;
+}
+
+.link-effect a::before {
+	margin-right: 10px;
+	content: '[';
+	-webkit-transform: translateX(20px);
+	-moz-transform: translateX(20px);
+	transform: translateX(20px);
+}
+
+.link-effect a::after {
+	margin-left: 10px;
+	content: ']';
+	-webkit-transform: translateX(-20px);
+	-moz-transform: translateX(-20px);
+	transform: translateX(-20px);
+}
+
+.link-effect a:hover::before,
+.link-effect a:hover::after{
+	outline: none;
+	opacity: 1;
+	-webkit-transform: translateX(0px);
+	-moz-transform: translateX(0px);
+	transform: translateX(0px);
+}

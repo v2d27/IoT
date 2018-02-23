@@ -12,6 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="./css/message.css">
 	<link rel="stylesheet" type="text/css" href="./css/header-bar.css">
 	<link rel="stylesheet" type="text/css" href="./css/table-control.css">
+	<link rel="stylesheet" type="text/css" href="./css/link-effect.css">
 </head>
 
 
@@ -129,7 +130,8 @@
 		</div>
 
 		<div>
-			<div>Bước 3: Hoàn tất. Tiến hành điều khiển thiết bị.</div>
+			<div>Bước 3: Kiểm tra tình trạng hoạt động của thiết bị.</div>
+			<button id="btn_device_test" class="btn btn-large">Kiểm tra thiết bị</button>
 		</div>
 
 		<div style="padding-top: 30px;"></div>
@@ -151,6 +153,7 @@
 			$("btn_connect_server").onclick = btn_server;
 			$("btn_connect_esp8266").onclick = esp8266_device;
 			$("btn_message_send").onclick = message_send;
+			$("btn_device_test").onclick = testing_device;
 		</script>
 	</div>
 
@@ -236,6 +239,8 @@
 		<div style="margin-top: 30px;"></div>
 	</div>
 	
-	<div style="text-align: center; margin-top: 15px; margin-bottom: 15px; font-size: 14px;">Copyright Feburary, 2018</div>
+	<div style="text-align: center; margin-top: 15px; margin-bottom: 15px; font-size: 14px;">This website is deployed in Feburary, 2018 for IoT project.
+		<div class="link-effect">More information: <a href="mailto:ducduc08@gmail.com">email address</a></div>
+	</div>
 </body>
 </html>
