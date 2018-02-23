@@ -42,11 +42,24 @@
 }
 
 
-.table-control table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 75%;
-    font-size: 17px;
+/*Dùng cho PC, máy tính bảng*/
+@media all and (min-width: 800px) {
+  .table-control table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 75%;
+      font-size: 17px;
+  }
+}
+
+/*Dùng cho thiết bị di động*/
+@media all and (max-width: 800px) {
+  .table-control table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 97%;
+      font-size: 14px;
+  }
 }
 
 .table-control td, th {

@@ -35,7 +35,6 @@
 	{
 		window.onload = iot_onload;
 	}
-
 </script>
 
 <style type="text/css">
@@ -73,12 +72,12 @@
 
 
 	<div class="header-bar">
-	  <button id="header-home">Trang chủ</button>
-	  <button id="header-idea">Ý tưởng</button>
-	  <button id="header-product">Sản phẩm</button>
-	  <button id="header-connect"> Kết nối</button>
-	  <button id="header-control"> Điều khiển</button>
-	  <button id="header-user"> user.admin</button>
+		<button id="header-home">Trang chủ</button>
+		<button id="header-idea">Ý tưởng</button>
+		<button id="header-product">Sản phẩm</button>
+		<button id="header-connect"> Kết nối</button>
+		<button id="header-control"> Điều khiển</button>
+		<button id="header-user"> user.admin</button>
 	</div>
 
 	<!--- home Tab -->
@@ -117,7 +116,7 @@
 	</div>
 
 	<!--- CONNECT Tab -->
-	<div id="connect" class="main-tab-content" style="margin-left: 50px;">
+	<div id="connect" class="main-tab-content">
 		<h2> I. Kết nối đến MQTT Broker thông qua WebSocket</h2>
 		<div>
 			<div>Bước 1: Kết nối đến MQTT Broker....</div>
@@ -137,13 +136,15 @@
 
 
 		<h2> II. Bảng hoạt động của hệ thống</h2>
-		<div class="message-body" id="message-body"></div>
-		<div class="message-control">
-			<input type="text" id="message_text"></input>
-			<button id="btn_message_send">Command</button>
-			<script type="text/javascript" src="./js/message.js"></script>
+		<div class="message">
+			<div class="message-body" id="message-body"></div>
+			<div class="message-control">
+				<input type="text" id="message_text" placeholder="Nhập vào lệnh điều khiển"></input>
+				<button id="btn_message_send">Command</button>
+				<script type="text/javascript" src="./js/message.js"></script>
+			</div>
 		</div>
-
+		
 		<div style="padding-bottom: 100px;"></div>
 		<script type="text/javascript">
 			// Control Click event listener
