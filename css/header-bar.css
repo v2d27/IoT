@@ -169,16 +169,18 @@ div.background-test .background-caption span.sub-border {
 
 
 /* CONNECT TAB  ========================================================*/
-.btn {
-    color: #fff;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    display: inline-block;
-    cursor: pointer;
-    /*Tắt border cho button*/
-    outline: none;
-    border: none;
-}
+@media all and (min-width: 800px) {
+    .btn {
+        color: #fff;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        display: inline-block;
+        cursor: pointer;
+        /*Tắt border cho button*/
+        outline: none;
+        border: none;
+        font-size: 14px;
+    }
 
 .btn-large {
     width: 300px;
@@ -188,6 +190,35 @@ div.background-test .background-caption span.sub-border {
     border-left-color: coral;
     background: #2f91b7;
 }
+
+}
+
+@media all and (max-width: 800px) {
+    .btn {
+        color: #fff;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        margin: 5px auto;
+        display: table;
+        cursor: pointer;
+        /*Tắt border cho button*/
+        outline: none;
+        border: none;
+        font-size: 14px;
+    }
+
+    .btn-large {
+        width: 60%;
+        height: 30px;
+        border-left-color: #4caF50;
+        border-left-style: solid;
+        border-left-color: coral;
+        background: #2f91b7;
+    }
+}
+
+
+
 
 
 .btn-large:hover {

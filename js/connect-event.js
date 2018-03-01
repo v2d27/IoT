@@ -58,11 +58,9 @@ function message_add_send(str) {
 function message_send()
 {
 	if (MQTT_ON_CONNECTED === true) {
-		var obj = new Object();
-		obj.msg = $('message_text').value;
-		var jsonstring = JSON.stringify(obj);
-		MQTT_DATA_SEND = jsonstring;
-		mqtt_push(jsonstring);
+		var message_command = $("message_command").value;
+		var message_command_value = $("message_command_value").value;
+		mqtt_push(message_command, message_command_value);
 	}
 	else
 	{
@@ -80,9 +78,17 @@ function btn_server()
 function esp8266_device()
 {
 	if (MQTT_ON_CONNECTED === true) {
-		$("btn_connect_esp8266").innerHTML = "Connecting...";
-		$("btn_connect_esp8266").style.backgroundColor = '#555555';
-		console.log("connecting to esp866...");
+		if (ESP8266_ON_CONNECTED === false) {
+			$("btn_connect_esp8266").innerHTML = "Đang kết nối...";
+			$("btn_connect_esp8266").style.backgroundColor = '#555555';
+			console.log("connecting to esp866...");
+			mqtt_push("esp8266", "request_connect");
+			setTimeout(esp8266_device_callback, 5000);
+		}
+		else
+		{
+			alert("Đã kết nối đến ESP8266 thành công!");
+		}
 	}
 	else
 	{
@@ -90,8 +96,87 @@ function esp8266_device()
 	}
 }
 
+function esp8266_device_callback()
+{
+	if (MQTT_ON_CONNECTED === true) {
+		if (ESP8266_ON_CONNECTED === false) {
+			$("btn_connect_esp8266").innerHTML = "Kết nối không thành công";
+			$("btn_connect_esp8266").style.backgroundColor = '#bd0000e6';
+			console.log("Can not connect to ESP8266 device.");
+			alert("Không thể kết nối đến thiết bị ESP8266. Vui lòng kiểm tra và kết nối lại.");
+		}
+	}
+	else
+	{
+		alert("MQTT connection is losted. Please reconnect...");
+	}
+}
+
+function esp8266_device_received(value)
+{
+	if (value === "success") {
+		ESP8266_ON_CONNECTED = true;
+		$("btn_connect_esp8266").style.backgroundColor = '#22ac3c';
+		$("btn_connect_esp8266").innerHTML = "Đã kết nối";
+	}
+	else
+	{
+		ESP8266_ON_CONNECTED = false;
+		$("btn_connect_esp8266").innerHTML = "Kết nối không thành công";
+		$("btn_connect_esp8266").style.backgroundColor = '#bd0000e6';
+		console.log("Can not connect to ESP8266 device.");
+		alert("Không thể kết nối đến thiết bị ESP8266. Vui lòng kiểm tra và kết nối lại.");
+	}
+}
+
+function esp8266_testing_device()
+{
+	if (MQTT_ON_CONNECTED === true) {
+		if (ESP8266_ON_CONNECTED === true) {
+			ESP8266_WORKING_STATUS = false;
+			$("btn_device_test").innerHTML = "Đang kiểm tra...";
+			$("btn_device_test").style.backgroundColor = '#555555';
+			console.log("testing ESP8266 device...");
+			mqtt_push("esp8266", "working_status");
+			setTimeout(esp8266_testing_device_callback, 5000);
+		}
+		else
+		{
+			alert("Không thể kết nối đến thiết bị ESP8266. Vui lòng kiểm tra và kết nối lại trước khi kiểm tra thiết bị.");
+		}
+	}
+	else
+	{
+		alert("MQTT connection is losted. Please reconnect...");
+	}
+}
+
+function esp8266_testing_device_callback()
+{
+	if (ESP8266_WORKING_STATUS === false) {
+		$("btn_device_test").innerHTML = "Không hoạt động";
+		$("btn_device_test").style.backgroundColor = '#bd0000e6';
+	}
+}
+
+function esp8266_testing_device_received(value)
+{
+	if (value == "ok") {
+		ESP8266_WORKING_STATUS = true;
+		$("btn_device_test").style.backgroundColor = '#22ac3c';
+		$("btn_device_test").innerHTML = "Hoạt động trong tình trạng tốt";
+	}
+	else
+	{
+		$("btn_device_test").style.backgroundColor = '#b72fa6';
+		$("btn_device_test").innerHTML = "Trạng thái: " + value;
+	}
+}
+
 var user_id = "id_" + parseInt(Math.random() * 1000000, 10).toString();
 var MQTT_ON_CONNECTED = false;
+var ESP8266_ON_CONNECTED = false;
+var ESP8266_WORKING_STATUS = false;
 var MQTT_DATA_SEND = "";
 client = new Paho.MQTT.Client("m14.cloudmqtt.com", 30982, user_id);
 client.onConnectionLost = onConnectionLost;
@@ -104,28 +189,22 @@ var options = {
 	onFailure:onFailed
 }
 
-
-
-function mqtt_push(mqtt_data)
-{
-	message = new Paho.MQTT.Message(mqtt_data);
-	message.destinationName = "client_user";
-	client.send(message);
-}
-
 function onConnect() {
 	// Once a connection has been made, make a subscription and send a message.
 	console.log("onConnect");
-	client.subscribe("client_user");
+	console.log("subscribe topic: " + $("topic_subscribe").value);
+	client.subscribe($("topic_subscribe").value);
+	console.log("subscribe topic: " + $("topic_publish").value);
+	client.subscribe($("topic_publish").value);
 	MQTT_ON_CONNECTED = true;
 
-	var obj = new Object();
-	obj.newuser = user_id;
-	var jsonstring = JSON.stringify(obj);
-	mqtt_push(jsonstring);
+	mqtt_push("esp8266", user_id);
 
 	$("btn_connect_server").style.backgroundColor = '#22ac3c';
 	$("btn_connect_server").innerHTML = "Connected";
+	window.onbeforeunload = function(event) {
+    	event.returnValue = "You will be losing message from server if you leave this page.";
+	};	
 }
 //Make connection failed
 function onFailed(e){
@@ -142,17 +221,58 @@ function onConnectionLost(responseObject) {
 		alert("onConnectionLost: " + responseObject.errorMessage);
 	}
 }
+
+//called when sending a message
+function mqtt_push(message_command, message_command_value)
+{
+	if (message_command === "") {
+		alert("No command to send!");
+		return ;
+	}
+	if (message_command_value === "") {
+		message_command_value = '""';
+	}
+	var str = message_command + '=' + message_command_value;
+	message = new Paho.MQTT.Message(str);
+	message.destinationName = $("topic_publish").value;
+	return client.send(message);
+}
+
 // called when a message arrives
 function onMessageArrived(message) {
     var str = message.payloadString;
-    if (str === MQTT_DATA_SEND) {
+    var topic = message.destinationName;
+    console.log("onMessageArrived: " + str);
+
+    if(topic === $("topic_publish").value) {
     	message_add_send(str);
     }
-    else
-    {
+    if(topic === $("topic_subscribe").value) {
     	message_add_recieve(str);
+    	var pos = str.indexOf('=');
+    	if (pos >= 0) {
+    		var message_command = str.substr(0, pos);
+    		var message_command_value = str.substr(pos+1, str.length - message_command.length -1);
+    		console.log("message_command=" + message_command);
+    		console.log("message_command_value=" + message_command_value);
+    		message_received_processing(message_command, message_command_value);
+    	}
     }
     
-	console.log("onMessageArrived: " + str);
-	setTimeout(message_body_scrollDown, 100);
+	
+	if($("checkbox-message-scrolldown").checked) {
+		setTimeout(message_body_scrollDown, 100);
+	}
+	
+}
+
+
+function message_received_processing(message_command, message_command_value)
+{
+	if (message_command === "working_status") {
+		esp8266_testing_device_received(message_command_value);
+	}
+	if (message_command === "respond_connect") {
+		esp8266_device_received(message_command_value);
+	}
 }

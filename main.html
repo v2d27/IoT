@@ -13,11 +13,16 @@
 	<link rel="stylesheet" type="text/css" href="./css/header-bar.css">
 	<link rel="stylesheet" type="text/css" href="./css/table-control.css">
 	<link rel="stylesheet" type="text/css" href="./css/link-effect.css">
+	<link rel="stylesheet" type="text/css" href="./css/tooltip.css">
+	<link rel="stylesheet" type="text/css" href="./css/checkbox.css">
 </head>
 
 
 <script type="text/javascript">
 	function iot_onload() {
+		$("topic_subscribe").value = "ESP8266_SEND";
+		$("topic_publish").value = "ESP8266_RECEIVE";
+		
 		return ;
 	    if (iot_is_login() === false) {
 	        window.location.href = "./login/index.html";
@@ -54,6 +59,11 @@
 	    display: block!important;
 	    z-index: 0;
 	}
+
+	h1, h2, h3, h4 {
+		margin-bottom: 5px!important;
+		margin-top: 5px!important;
+	}
 </style>
 
 
@@ -73,12 +83,12 @@
 
 
 	<div class="header-bar">
-		<button id="header-home">Trang chủ</button>
-		<button id="header-idea">Ý tưởng</button>
-		<button id="header-product">Sản phẩm</button>
-		<button id="header-connect"> Kết nối</button>
-		<button id="header-control"> Điều khiển</button>
-		<button id="header-user"> user.admin</button>
+		<button id="header-home" title="Trang chủ">Trang chủ</button>
+		<button id="header-idea" title="Ý tưởng">Ý tưởng</button>
+		<button id="header-product" title="Sản phẩm">Sản phẩm</button>
+		<button id="header-connect" title="Kết nối"> Kết nối</button>
+		<button id="header-control" title="Điều khiển"> Điều khiển</button>
+		<button id="header-user" title="Đăng xuất khỏi hệ thống"> user.admin</button>
 	</div>
 
 	<!--- home Tab -->
@@ -117,35 +127,55 @@
 	</div>
 
 	<!--- CONNECT Tab -->
-	<div id="connect" class="main-tab-content">
-		<h2> I. Kết nối đến MQTT Broker thông qua WebSocket</h2>
+	<div id="connect" class="main-tab-content" style="margin-left: 10px; margin-right: 10px;">
+		<h2> I. Kết nối</h2>
 		<div>
-			<div>Bước 1: Kết nối đến MQTT Broker....</div>
-			<button id="btn_connect_server" class="btn btn-large">Connect to MQTT</button>
+			<h4>Bước 1: Kết nối đến MQTT Broker....</h4>
+			<table>
+				<tr>
+					<td>Topic subscribe:</td>
+					<td><div class="topic-input"> <input type="input" id="topic_subscribe" placeholder="Topic Subscribe" title="Topic đăng kí nhận tín hiệu từ ESP8266"></div></td>
+				</tr>
+				<tr>
+					<td>Topic publish:</td>
+					<td><div class="topic-input"> <input type="input" id="topic_publish" placeholder="Topic Publish" title="Topic gửi tín hiệu đến ESP8266"></div></td>
+				</tr>
+			</table>
+			
+			<button id="btn_connect_server" class="btn btn-large" title="Kết nối đến máy chủ MQTT thông qua giao thức WebSocket.io">Kết nối MQTT</button>
 		</div>
 
 		<div>
-			<div>Bước 2: Kết nối đến thiết bị IoT...</div>
-			<button id="btn_connect_esp8266" class="btn btn-large">Connect to ESP8266 device</button>
+			<h4>Bước 2: Kết nối đến thiết bị IoT...</h4>
+			<button id="btn_connect_esp8266" class="btn btn-large" title="Gửi lệnh kết nối đến thiết bị điều khiển bằng web">Kết nối ESP8266</button>
 		</div>
 
 		<div>
-			<div>Bước 3: Kiểm tra tình trạng hoạt động của thiết bị.</div>
-			<button id="btn_device_test" class="btn btn-large">Kiểm tra thiết bị</button>
+			<h4>Bước 3: Kiểm tra tình trạng hoạt động của thiết bị.</h4>
+			<button id="btn_device_test" class="btn btn-large" title="Kiểm tra tình trạng hoạt động của thiết bị">Kiểm tra thiết bị</button>
 		</div>
+
 
 		<div style="padding-top: 30px;"></div>
-
-
 		<h2> II. Bảng hoạt động của hệ thống</h2>
+	    <label class="control control--checkbox">Auto-scroll down when having messages. 
+	      <input type="checkbox" checked="checked" id="checkbox-message-scrolldown" />
+	      <div class="control__indicator"></div>
+	    </label>
 		<div class="message">
 			<div class="message-body" id="message-body"></div>
 			<div class="message-control">
-				<input type="text" id="message_text" placeholder="Nhập vào lệnh điều khiển"></input>
-				<button id="btn_message_send">Command</button>
+				<input type="text" id="message_command" placeholder="Lệnh điều khiển"></input>
+				<input type="text" id="message_command_value" placeholder="Nội dung lệnh (không bắt buộc)"></input>
+				
+				<button id="btn_message_send" title="Gửi tín hiệu điều khiển">Command</button>
 				<script type="text/javascript" src="./js/message.js"></script>
 			</div>
 		</div>
+
+
+		<div style="padding-top: 30px;"></div>
+		<h2> III. Danh sách các lệnh điều khiển</h2>
 		
 		<div style="padding-bottom: 100px;"></div>
 		<script type="text/javascript">
@@ -153,7 +183,7 @@
 			$("btn_connect_server").onclick = btn_server;
 			$("btn_connect_esp8266").onclick = esp8266_device;
 			$("btn_message_send").onclick = message_send;
-			$("btn_device_test").onclick = testing_device;
+			$("btn_device_test").onclick = esp8266_testing_device;
 		</script>
 	</div>
 
