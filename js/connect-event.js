@@ -248,7 +248,6 @@ function onMessageArrived(message) {
     	message_add_send(str);
     }
     if(topic === $("topic_subscribe").value) {
-    	message_add_recieve(str);
     	var pos = str.indexOf('=');
     	if (pos >= 0) {
     		var message_command = str.substr(0, pos);
@@ -257,6 +256,7 @@ function onMessageArrived(message) {
     		console.log("message_command_value=" + message_command_value);
     		message_received_processing(message_command, message_command_value);
     	}
+    	message_add_recieve(str);
     }
     
 	
