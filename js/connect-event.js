@@ -173,6 +173,35 @@ function esp8266_testing_device_received(value)
 	}
 }
 
+function table_show_msg(index, message) {
+	var table = $('table_control');
+    //update ghi chú
+    table.rows[index].cells[3].innerHTML = message;
+}
+
+function slider(id) {
+	if(!MQTT_ON_CONNECTED) {
+		alert("MQTT connection is lost. Please reconnect MQTT before controlling...");
+		$("slider_" + id).checked = false;
+		return ;
+	}
+	/*
+	if(!ESP8266_ON_CONNECTED) {
+		alert("ESP8266 is not connected...");
+		$("slider_" + id).checked = false;
+		return ;
+	}*/
+
+	if($("slider_" + id).checked) {
+		mqtt_push("role" + id, "on");
+	}
+	else {
+		mqtt_push("role" + id, "off");
+	}
+	table_show_msg(id, "Đang gửi...");
+	$("slider_" + id).checked = false;
+}
+
 var user_id = "id_" + parseInt(Math.random() * 1000000, 10).toString();
 var MQTT_ON_CONNECTED = false;
 var ESP8266_ON_CONNECTED = false;
