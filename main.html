@@ -64,6 +64,10 @@
 		margin-bottom: 5px!important;
 		margin-top: 5px!important;
 	}
+
+	ul {
+		margin-top: 0px;
+	}
 </style>
 
 
@@ -130,7 +134,7 @@
 	<div id="connect" class="main-tab-content" style="margin-left: 10px; margin-right: 10px;">
 		<h2> I. Kết nối</h2>
 		<div>
-			<h4>Bước 1: Kết nối đến MQTT Broker....</h4>
+			<h4>Bước 1: Kết nối đến máy chủ MQTT (MQTT Broker).</h4>
 			<table>
 				<tr>
 					<td>Topic subscribe:</td>
@@ -146,7 +150,7 @@
 		</div>
 
 		<div>
-			<h4>Bước 2: Kết nối đến thiết bị IoT...</h4>
+			<h4>Bước 2: Kết nối đến thiết bị IoT.</h4>
 			<button id="btn_connect_esp8266" class="btn btn-large" title="Gửi lệnh kết nối đến thiết bị điều khiển bằng web">Kết nối ESP8266</button>
 		</div>
 
@@ -176,7 +180,47 @@
 
 		<div style="padding-top: 30px;"></div>
 		<h2> III. Danh sách các lệnh điều khiển</h2>
-		
+		<div style="font-size: 14px;">
+			<h3>1. Lệnh điều khiển role</h3>
+			<b>* Bật, tắt thiết bị</b>
+			<ul>
+				<li><div>Cấu trúc câu lệnh: <i>role{number} = {state}</i></div></li>
+				<li><div>Tham số:</div></li>
+				<div>{number} : số thứ tự của role (bắt đầu từ 1). Xem khai báo trong Arduino Uno R3.</div>
+				<div>{state} : thiết đặt trạng thái cho thiết bị. Thay thế bằng "on" nếu bật thiết bị và tắt thiết bị được thay thế bằng "off".</div>
+			</ul>
+			<b>* Xem trạng thái của thiết bị</b>
+			<ul>
+				<li><div>Cấu trúc câu lệnh: <i>role_getstate=""</i></div></li>
+				<li><div>Tham số: không có.</div></li>
+			</ul>
+			<h3>2. Lệnh điều khiển màn hình LCD</h3>
+			<b>* Hiện thông báo</b>
+			<ul>
+				<li><div>Cấu trúc câu lệnh: <i>lcd_msg = {message}</i></div></li>
+				<li>
+					<div>Tham số:</div>
+					<div>{message} : Nội dung thông báo sẽ được hiển thị lên dòng thứ 3, căn lề giữa.</div>
+				</li>
+			</ul>
+			<b>* Hiện kí tự tại vị trí bất kì</b>
+			<ul>
+				<li><div>Cấu trúc câu lệnh: <i>lcd_xy = {x}, {y}, {message}</i></div></li>
+				<li>
+					<div>Tham số:</div>
+					<div>{x} : vị trí ô ghi trên một dòng. Giá trị từ [0, 19].</div>
+					<div>{y} : vị trí của dòng. Giá trị từ [0, 3].</div>
+					<div>{message} : Nội dung thông báo sẽ được hiển thị tại tọa độ (x, y).</div>
+				</li>
+			</ul>
+			<h3>3. Lệnh điều khiển đồng hồ thời gian thực</h3>
+			<b>* Lấy giá trị giờ hiện tại của hệ thống</b>
+			<ul>
+				<li><div>Cấu trúc câu lệnh: <i>clock = get_time</i></div></li>
+				<li><div>Tham số: Không có.</div></li>
+			</ul>
+		</div>
+
 		<div style="padding-bottom: 100px;"></div>
 		<script type="text/javascript">
 			// Control Click event listener
@@ -190,7 +234,8 @@
 	<!--- Control Tab -->
 	<div id="control" class="main-tab-content">
 		<div class="table-control">
-		  <table align="center">
+			<div style="margin-top: 20px;"></div>
+		  <table align="center" id="table_control">
 		    <caption>Bảng điểu khiển</caption>
 		  <tr>
 		    <th width="10%">STT</th>
@@ -200,7 +245,7 @@
 		  </tr>
 		  <tr>
 		    <td>1</td>
-		    <td>Maria Anders</td>
+		    <td>Role số 1</td>
 		    <td>
 		      <div class="slider">
 		        <input type="checkbox" id="slider_1" onclick="slider(1)">
@@ -211,7 +256,7 @@
 		  </tr>
 		  <tr>
 		    <td>2</td>
-		    <td>Francisco Chang</td>
+		    <td>Role số 2</td>
 		    <td>
 		      <div class="slider">
 		        <input type="checkbox" id="slider_2" onclick="slider(2)">
@@ -222,7 +267,7 @@
 		  </tr>
 		  <tr>
 		    <td>3</td>
-		    <td>Roland Mendel</td>
+		    <td>Role số 3</td>
 		    <td>
 		      <div class="slider">
 		        <input type="checkbox" id="slider_3" onclick="slider(3)">
@@ -233,7 +278,7 @@
 		  </tr>
 		  <tr>
 		    <td>4</td>
-		    <td>Helen Bennett</td>
+		    <td>Role số 4</td>
 		    <td>
 		      <div class="slider">
 		        <input type="checkbox" id="slider_4" onclick="slider(4)">
@@ -266,7 +311,7 @@
 		  </tr>
 		</table>
 		</div>
-		<div style="margin-top: 30px;"></div>
+		<div style="margin-top: 100px;"></div>
 	</div>
 	
 	<div style="text-align: center; margin-top: 15px; margin-bottom: 15px; font-size: 14px;">This website is deployed in Feburary, 2018 for IoT project.
