@@ -194,11 +194,13 @@ function slider(id) {
 
 	if($("slider_" + id).checked) {
 		mqtt_push("role" + id, "on");
+		table_show_msg(id, "Đang bật");
 	}
 	else {
 		mqtt_push("role" + id, "off");
+		table_show_msg(id, "Đang tắt");
 	}
-	//table_show_msg(id, "Đang gửi...");
+	
 	//$("slider_" + id).checked = false;
 }
 
@@ -287,7 +289,6 @@ function onMessageArrived(message) {
     	}
     	message_add_recieve(str);
     }
-    
 	
 	if($("checkbox-message-scrolldown").checked) {
 		setTimeout(message_body_scrollDown, 100);
