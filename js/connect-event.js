@@ -198,8 +198,8 @@ function slider(id) {
 	else {
 		mqtt_push("role" + id, "off");
 	}
-	table_show_msg(id, "Đang gửi...");
-	$("slider_" + id).checked = false;
+	//table_show_msg(id, "Đang gửi...");
+	//$("slider_" + id).checked = false;
 }
 
 var user_id = "id_" + parseInt(Math.random() * 1000000, 10).toString();
@@ -303,5 +303,8 @@ function message_received_processing(message_command, message_command_value)
 	}
 	if (message_command === "respond_connect") {
 		esp8266_device_received(message_command_value);
+	}
+	if (message_command === "role_response") {
+
 	}
 }
