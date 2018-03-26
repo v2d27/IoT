@@ -132,7 +132,8 @@
 		<p>"Hệ thống điều khiển và giám sát thiết bị điện" được nhóm nghiên cứu và phát triển để đáp ứng nhu cầu của thực tế về một hệ thống quản lý và giám sát hoàn chỉnh cho các thiết bị điện trong nhà, trong gia đình, tại nơi làm việc,... với tốc độ đáp ứng nhanh chóng, chính xác trong môi trường mạng ít ổn định, băng thông thấp, hay xảy ra nghẽn mạng mà các phương pháp cũ thường hoạt động không ổn định khi gặp phải những vấn đề về mạng này. Thông qua đó, đây là sản phẩm nền tảng để phát triển và ứng dụng vào nhiều dự án IoT (Internet of Things) khác nhau.</p>
 		<p>Hệ thống có thể được điều khiển từ nhiều thiết bị cùng một thời điểm, với yêu cầu duy nhất là có thể kết nối được mạng internet và có trình duyệt truy cập vào internet giúp điều khiển hệ thống. Ví dụ điện thoại smartphone, smart tivi, máy tính,... Website hoạt động được trên nhiều nền tảng và nhiều trình duyệt khác nhau, tuy nhiên hoạt động tốt nhất là trên trình duyệt google chrome. Dưới đây là sơ đồ khối tổng quát của hệ thống:</p>
 		<img src=".\image\system-diagram.png" align="center" style="margin: 0px auto; display: block;">
-
+		<p><a href="http://mqtt.org/">MQTT</a> (Message Queuing Telemetry Transport) là giao thức truyền tin rất đơn giản và tiết kiệm theo mô hình publish/subscribe (tạm dịch là cung cấp/đăng kí). <a href="http://mqtt.org/">MQTT</a> được thiết kế dành cho các thiết bị và hệ thống mạng có băng thông nhỏ, độ trễ cao hoặc không ổn định. Nguyên lý hoạt động của <a href="http://mqtt.org/">MQTT</a> nhằm làm tối thiểu hóa yêu cầu về băng thông của mạng, tài nguyên của thiết bị đồng thời cũng đảm bảo độ ổn định, chính xác cho quá trình truyền, nhận thông tin. Ngoài ra, nguyên lý trên còn là một giao thức kết nối máy với máy machine-to-machine (M2M) hoặc kết nối vạn vật (IoT) trong các ứng dụng dành cho điện thoại có băng thông và nguồn pin trung bình.</p>
+		<p>Trong một hệ thống sử dụng giao thức MQTT, nhiều thiết bị (mqtt client - gọi tắt client) kết nối tới máy chủ MQTT (gọi là MQTT broker) và đăng kí một hoặc vài topic (chủ đề) để nhận tin và gửi lại tín hiệu tin tức lên máy chủ MQTT. Ở hệ thống này, máy chủ MQTT được chọn ở website <a href="www.cloudmqtt.com">www.cloudmqtt.com</a>. MQTT broker này giao tiếp với người dùng qua website bằng giao thức WebSocket và điều khiển tín hiệu tới các thiết bị IoT bằng giao thức MQTT. Thiết bị mqtt client kết nối internet trong hệ thông này là mạch tích hợp ESP8266 12E trong board mạch NodeMCU 1.0. Ngoài ra, do giới hạn số chân của board mạch ESP8266 và đảm bảo tính ổn định của hệ thống, vi điều khiển ATmega328 được sử dụng để điều khiển các thiết bị ngoại vi đầu cuối.</p>
 		<div style="padding: 10px;"></div>
 		<h2 align="center" style="margin-bottom: 0px!important;">Phần II</h2>
 		<h3 align="center" style="margin-top: 0px!important;">Nguyên Lý Hoạt Động Của Hệ Thống</h3>
@@ -148,7 +149,8 @@
 	<div id="connect" class="main-tab-content tab-content-align">
 		<h2> I. Kết nối</h2>
 		<div>
-			<h4>Bước 1: Kết nối đến máy chủ MQTT (MQTT Broker).</h4>
+			<h4 style="margin: 0px 0px!important;">Bước 1: Kết nối đến máy chủ MQTT (MQTT Broker).</h4>
+			<p style="margin: 0px 5px!important;">* Đây là bước bắt buộc trước khi có thể điều khiển được các thiết bị trong mục điều khiển.</p>
 			<table>
 				<tr>
 					<td>Topic subscribe:</td>
@@ -176,7 +178,7 @@
 
 		<div style="padding-top: 30px;"></div>
 		<h2> II. Bảng hoạt động của hệ thống</h2>
-	    <label class="control control--checkbox">Auto-scroll down when having messages. 
+	    <label class="control control--checkbox">Tự động kéo thanh cuộn xuống khi có chuỗi tin gửi tới. 
 	      <input type="checkbox" checked="checked" id="checkbox-message-scrolldown" />
 	      <div class="control__indicator"></div>
 	    </label>
