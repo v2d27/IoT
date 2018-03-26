@@ -309,3 +309,7 @@ function message_received_processing(message_command, message_command_value)
 
 	}
 }
+
+function temp_fuck_github() {
+	
+}
