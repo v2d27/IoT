@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>IoT Project 2018</title>
+	<title>Hệ thống điều khiển và giám sát thiết bị điện 2018</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" href="./logo/iot_logo.png">
@@ -61,8 +61,8 @@
 	}
 
 	h1, h2, h3, h4 {
-		margin-bottom: 5px!important;
-		margin-top: 5px!important;
+		margin-bottom: 5px;
+		margin-top: 5px;
 	}
 
 	ul {
@@ -88,10 +88,10 @@
 
 	<div class="header-bar">
 		<button id="header-home" title="Trang chủ">Trang chủ</button>
-		<button id="header-idea" title="Ý tưởng">Ý tưởng</button>
 		<button id="header-product" title="Sản phẩm">Sản phẩm</button>
 		<button id="header-connect" title="Kết nối"> Kết nối</button>
 		<button id="header-control" title="Điều khiển"> Điều khiển</button>
+		<button id="header-idea" title="Hướng dẫn">Hướng dẫn</button>
 		<button id="header-user" title="Đăng xuất khỏi hệ thống"> user.admin</button>
 	</div>
 
@@ -125,13 +125,27 @@
 	</div>
 
 	<!--- Product Tab -->
-	<div id="product" class="main-tab-content">
-		<div style="padding: 25px 25px;"></div>
-		<div align="center" style="margin-bottom: 20px">Source of IoT project is available on <a href="https://github.com/Hercules2404/IoT">GitHub</a>.</div>
+	<div id="product" class="main-tab-content tab-content-align">
+		<div style="padding: 10px;"></div>
+		<h2 align="center" style="margin-bottom: 0px!important;">Phần I</h2>
+		<h3 align="center" style="margin-top: 0px!important;">Giới thiệu chung về hệ thống điều khiển và giám sát thiết bị điện</h3>
+		<p>"Hệ thống điều khiển và giám sát thiết bị điện" được nhóm nghiên cứu và phát triển để đáp ứng nhu cầu của thực tế về một hệ thống quản lý và giám sát hoàn chỉnh cho các thiết bị điện trong nhà, trong gia đình, tại nơi làm việc,... với tốc độ đáp ứng nhanh chóng, chính xác trong môi trường mạng ít ổn định, băng thông thấp, hay xảy ra nghẽn mạng mà các phương pháp cũ thường hoạt động không ổn định khi gặp phải những vấn đề về mạng này. Thông qua đó, đây là sản phẩm nền tảng để phát triển và ứng dụng vào nhiều dự án IoT (Internet of Things) khác nhau.</p>
+		<p>Hệ thống có thể được điều khiển từ nhiều thiết bị cùng một thời điểm, với yêu cầu duy nhất là có thể kết nối được mạng internet và có trình duyệt truy cập vào internet giúp điều khiển hệ thống. Ví dụ điện thoại smartphone, smart tivi, máy tính,... Website hoạt động được trên nhiều nền tảng và nhiều trình duyệt khác nhau, tuy nhiên hoạt động tốt nhất là trên trình duyệt google chrome. Dưới đây là sơ đồ khối tổng quát của hệ thống:</p>
+		<img src=".\image\system-diagram.png" align="center" style="margin: 0px auto; display: block;">
+
+		<div style="padding: 10px;"></div>
+		<h2 align="center" style="margin-bottom: 0px!important;">Phần II</h2>
+		<h3 align="center" style="margin-top: 0px!important;">Nguyên Lý Hoạt Động Của Hệ Thống</h3>
+
+		<div style="padding: 10px;"></div>
+		<h2 align="center" style="margin-bottom: 0px!important;">Phần III</h2>
+		<h3 align="center" style="margin-top: 0px!important;">Mã nguồn website</h3>
+		<img src=".\image\github.png" align="center" style="margin: 0px auto; display: block;" width="300px" height="100px">
+		<div align="center" style="margin-bottom: 20px">Mã nguồn của website điểu khiển được lưu trữ tại <a href="https://github.com/Hercules2404/IoT">Github Server</a>.</div>
 	</div>
 
 	<!--- CONNECT Tab -->
-	<div id="connect" class="main-tab-content" style="margin-left: 10px; margin-right: 10px;">
+	<div id="connect" class="main-tab-content tab-content-align">
 		<h2> I. Kết nối</h2>
 		<div>
 			<h4>Bước 1: Kết nối đến máy chủ MQTT (MQTT Broker).</h4>
@@ -143,7 +157,6 @@
 				<tr>
 					<td>Topic publish:</td>
 					<td><div class="topic-input"> <input type="input" id="topic_publish" placeholder="Topic Publish" title="Topic gửi tín hiệu đến ESP8266"></div></td>
-					<div>This is test page</div>
 				</tr>
 			</table>
 			
@@ -284,28 +297,6 @@
 		      <div class="slider">
 		        <input type="checkbox" id="slider_4" onclick="slider(4)">
 		        <label for="slider_4">
-		      </div>
-		    </td>
-		    <td>...</td>
-		  </tr>
-		  <tr>
-		    <td>5</td>
-		    <td>Yoshi Tannamuri</td>
-		    <td>
-		      <div class="slider">
-		        <input type="checkbox" id="slider_5" onclick="slider(5)">
-		        <label for="slider_5">
-		      </div>
-		    </td>
-		    <td>...</td>
-		  </tr>
-		  <tr>
-		    <td>6</td>
-		    <td>Giovanni Rovelli</td>
-		    <td>
-		      <div class="slider">
-		        <input type="checkbox" id="slider_6" onclick="slider(6)">
-		        <label for="slider_6">
 		      </div>
 		    </td>
 		    <td>...</td>

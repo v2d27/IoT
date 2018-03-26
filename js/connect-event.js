@@ -153,6 +153,11 @@ function esp8266_testing_device()
 
 function esp8266_testing_device_callback()
 {
+	var str = "Trạng thái:";
+	if($("btn_device_test").innerHTML.substr(0, str.length) === str) {
+		return ;
+	}
+
 	if (ESP8266_WORKING_STATUS === false) {
 		$("btn_device_test").innerHTML = "Không hoạt động";
 		$("btn_device_test").style.backgroundColor = '#bd0000e6';
@@ -161,10 +166,25 @@ function esp8266_testing_device_callback()
 
 function esp8266_testing_device_received(value)
 {
-	if (value == "ok") {
+	/* 0010 1000 0000 0000 0000 0010 0000 0000 */
+	if(value.length === 31) {
 		ESP8266_WORKING_STATUS = true;
 		$("btn_device_test").style.backgroundColor = '#22ac3c';
 		$("btn_device_test").innerHTML = "Hoạt động trong tình trạng tốt";
+
+
+		for(var i = 1; i <=4; i++) {
+			console.log("slider_" + i.toString() + '=' + value.charAt(i));
+			if (value.charAt(i) === '0') {
+				$("slider_" + i.toString()).checked = false;
+				table_show_msg(id, "Đang tắt");
+			}
+			if(value.charAt(i) === '1') {
+				$("slider_" + i.toString()).checked = true;
+				table_show_msg(id, "Đang bật");
+			}
+		}
+
 	}
 	else
 	{
@@ -308,8 +328,4 @@ function message_received_processing(message_command, message_command_value)
 	if (message_command === "role_response") {
 
 	}
-}
-
-function temp_fuck_github() {
-	
 }
