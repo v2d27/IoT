@@ -43,3 +43,7 @@ function set_active_button(tabidname) {
     $("header-user").classList.remove("header-btn-active");
     $(tabidname).classList.add("header-btn-active");
 }
+
+function fuck_github_noupdate_when_changing_in_same_line() {
+    
+}
