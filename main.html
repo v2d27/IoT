@@ -67,6 +67,94 @@
 	ul {
 		margin-top: 0px;
 	}
+
+	.paragraph_report p {
+	    text-indent: 50px;
+	    text-align: justify;
+	    letter-spacing: 1px;
+	}
+
+	a {
+	    text-decoration: none;
+	    color: #008CBA;
+	}
+
+@media all and (min-width: 1024px) {
+	#connect {
+		padding: 30px 50px;
+	}
+}
+@media all and (min-width: 650px) and (max-width: 650px) {
+	#connect {
+		padding: 30px 0px;
+	}
+}
+
+@media all and (min-width: 650px) {
+	.spliter {
+	   width: 100%;
+	   border: 1px solid #8dc5ec;
+	   padding: 7px;
+	   overflow: auto;
+	   margin: 0px auto;
+	   padding-bottom: 0px;
+	}
+	#post {
+	   width: 42%;
+	   height: 600px;
+	   float: left;
+	}
+
+	#sidebar {
+		width: 56%;
+		height: 600px;
+		float: right;
+	}
+
+	#middle_line {
+		width: 2px;
+		height: 600px;
+		margin-left: 1%;
+		margin-right: 0.5%;
+		background-color: #8dc5ec;
+		float: center;
+		display: inline-block;
+	}
+}
+
+/*di động*/
+@media all and (max-width: 650px) {
+	.spliter {
+		padding: 30px 0px;
+		padding-bottom: 0px;
+	}
+	#post {
+	   display: block;
+	}
+
+	#sidebar {
+		display: block;
+	}
+
+	#middle_line {
+		display: none;
+	}
+
+	#connect {
+		padding: 0px 5px;
+	}
+}
+
+
+.step-border {
+	background-color: #b5b5b542;
+	display: block;
+	padding: 5px 10px;
+	margin-bottom: 10px;
+
+}
+
+
 </style>
 
 
@@ -94,6 +182,7 @@
 		<button id="header-user" title="Đăng xuất khỏi hệ thống"> user.admin</button>
 	</div>
 
+
 	<!--- home Tab -->
 	<div id="home" class="main-tab-content">
 		<div class="background-test">
@@ -117,21 +206,23 @@
 		<div class="fb-comments fb-widget" data-href="https://hercules2404.github.io/IoT" data-numposts="10" data-width="800" data-order-by="reverse_time"></div>
 	</div>
 
+
 	<!--- Idea Tab -->
 	<div id="idea" class="main-tab-content">
 		<div style="padding: 25px 25px;">This is idea page
 		</div>
 	</div>
 
+
 	<!--- Product Tab -->
-	<div id="product" class="main-tab-content tab-content-align">
+	<div id="product" class="main-tab-content tab-content-align paragraph_report">
 		<div style="padding: 10px;"></div>
 		<h2 align="center" style="margin-bottom: 0px!important;">Phần I</h2>
 		<h3 align="center" style="margin-top: 0px!important;">Giới thiệu chung về hệ thống điều khiển và giám sát thiết bị điện</h3>
 		<p>"Hệ thống điều khiển và giám sát thiết bị điện" được nhóm nghiên cứu và phát triển để đáp ứng nhu cầu của thực tế về một hệ thống quản lý và giám sát hoàn chỉnh cho các thiết bị điện trong nhà, trong gia đình, tại nơi làm việc,... với tốc độ đáp ứng nhanh chóng, chính xác trong môi trường mạng ít ổn định, băng thông thấp, hay xảy ra nghẽn mạng mà các phương pháp cũ thường hoạt động không ổn định khi gặp phải những vấn đề về mạng này. Thông qua đó, đây là sản phẩm nền tảng để phát triển và ứng dụng vào nhiều dự án IoT (Internet of Things) khác nhau.</p>
 		<p>Hệ thống có thể được điều khiển từ nhiều thiết bị cùng một thời điểm, với yêu cầu duy nhất là có thể kết nối được mạng internet và có trình duyệt truy cập vào internet giúp điều khiển hệ thống. Ví dụ điện thoại smartphone, smart tivi, máy tính,... Website hoạt động được trên nhiều nền tảng và nhiều trình duyệt khác nhau, tuy nhiên hoạt động tốt nhất là trên trình duyệt google chrome. Dưới đây là sơ đồ khối tổng quát của hệ thống:</p>
 		<img src=".\image\system-diagram.png" align="center" style="margin: 0px auto; display: block;">
-		<p><a href="http://mqtt.org/">MQTT</a> (Message Queuing Telemetry Transport) là giao thức truyền tin rất đơn giản và tiết kiệm theo mô hình publish/subscribe (tạm dịch là cung cấp/đăng kí). <a href="http://mqtt.org/">MQTT</a> được thiết kế dành cho các thiết bị và hệ thống mạng có băng thông nhỏ, độ trễ cao hoặc không ổn định. Nguyên lý hoạt động của <a href="http://mqtt.org/">MQTT</a> nhằm làm tối thiểu hóa yêu cầu về băng thông của mạng, tài nguyên của thiết bị đồng thời cũng đảm bảo độ ổn định, chính xác cho quá trình truyền, nhận thông tin. Ngoài ra, nguyên lý trên còn là một giao thức kết nối máy với máy machine-to-machine (M2M) hoặc kết nối vạn vật (IoT) trong các ứng dụng dành cho điện thoại có băng thông và nguồn pin trung bình.</p>
+		<p><a href="http://mqtt.org/">MQTT</a> (Message Queuing Telemetry Transport) là giao thức truyền tin mới, rất đơn giản và tiết kiệm theo mô hình publish/subscribe (tạm dịch là cung cấp/đăng kí). <a href="http://mqtt.org/">MQTT</a> được thiết kế dành cho các thiết bị và hệ thống mạng có băng thông nhỏ, độ trễ cao hoặc không ổn định. Nguyên lý hoạt động của <a href="http://mqtt.org/">MQTT</a> nhằm làm tối thiểu hóa yêu cầu về băng thông của mạng, tài nguyên của thiết bị đồng thời cũng đảm bảo độ ổn định, chính xác cho quá trình truyền, nhận thông tin. Ngoài ra, nguyên lý trên còn là một giao thức kết nối máy với máy machine-to-machine (M2M) hoặc kết nối vạn vật (IoT) trong các ứng dụng dành cho điện thoại có băng thông và nguồn pin trung bình.</p>
 		<p>Trong một hệ thống sử dụng giao thức MQTT, nhiều thiết bị (mqtt client - gọi tắt client) kết nối tới máy chủ MQTT (gọi là MQTT broker) và đăng kí một hoặc vài topic (chủ đề) để nhận tin và gửi lại tín hiệu tin tức lên máy chủ MQTT. Ở hệ thống này, máy chủ MQTT được chọn ở website <a href="www.cloudmqtt.com">www.cloudmqtt.com</a>. MQTT broker này giao tiếp với người dùng qua website bằng giao thức WebSocket và điều khiển tín hiệu tới các thiết bị IoT bằng giao thức MQTT. Thiết bị mqtt client kết nối internet trong hệ thông này là mạch tích hợp ESP8266 12E trong board mạch NodeMCU 1.0. Ngoài ra, do giới hạn số chân của board mạch ESP8266 và đảm bảo tính ổn định của hệ thống, vi điều khiển ATmega328 được sử dụng để điều khiển các thiết bị ngoại vi đầu cuối.</p>
 		<div style="padding: 10px;"></div>
 		<h2 align="center" style="margin-bottom: 0px!important;">Phần II</h2>
@@ -145,56 +236,60 @@
 	</div>
 
 	<!--- CONNECT Tab -->
-	<div id="connect" class="main-tab-content tab-content-align">
-		<h2> I. Kết nối</h2>
-		<div>
-			<h4 style="margin: 0px 0px!important;">Bước 1: Kết nối đến máy chủ MQTT (MQTT Broker).</h4>
-			<p style="margin: 0px 5px!important;">* Đây là bước bắt buộc trước khi có thể điều khiển được các thiết bị trong mục điều khiển.</p>
-			<table>
-				<tr>
-					<td>Topic subscribe:</td>
-					<td><div class="topic-input"> <input type="input" id="topic_subscribe" placeholder="Topic Subscribe" title="Topic đăng kí nhận tín hiệu từ ESP8266"></div></td>
-				</tr>
-				<tr>
-					<td>Topic publish:</td>
-					<td><div class="topic-input"> <input type="input" id="topic_publish" placeholder="Topic Publish" title="Topic gửi tín hiệu đến ESP8266"></div></td>
-				</tr>
-			</table>
-			
-			<button id="btn_connect_server" class="btn btn-large" title="Kết nối đến máy chủ MQTT thông qua giao thức WebSocket.io">Kết nối MQTT</button>
-		</div>
+	<div id="connect" class="main-tab-content">
+		<div class="spliter">
+			<div id="post">
+				<h2 style="color: #e05f00;"> I. Kết nối</h2>
+				<div class="step-border">
+					<h4 style="margin: 0px 0px!important; ">Bước 1: Kết nối đến máy chủ MQTT (MQTT Broker).</h4>
+					<p style="margin: 0px 5px!important; color: #709bff;">* Đây là bước bắt buộc trước khi có thể điều khiển được các thiết bị trong mục điều khiển.</p>
+					<table>
+						<tr>
+							<td>Topic subscribe:</td>
+							<td><div class="topic-input"> <input type="input" id="topic_subscribe" placeholder="Topic Subscribe" title="Topic đăng kí nhận tín hiệu từ ESP8266"></div></td>
+						</tr>
+						<tr>
+							<td>Topic publish:</td>
+							<td><div class="topic-input"> <input type="input" id="topic_publish" placeholder="Topic Publish" title="Topic gửi tín hiệu đến ESP8266"></div></td>
+						</tr>
+					</table>
+					
+					<button id="btn_connect_server" class="btn btn-large" title="Kết nối đến máy chủ MQTT thông qua giao thức WebSocket.io">Kết nối MQTT</button>
+				</div>
 
-		<div>
-			<h4>Bước 2: Kết nối đến thiết bị IoT.</h4>
-			<button id="btn_connect_esp8266" class="btn btn-large" title="Gửi lệnh kết nối đến thiết bị điều khiển bằng web">Kết nối ESP8266</button>
-		</div>
+				<div class="step-border">
+					<h4>Bước 2: Kết nối đến thiết bị IoT.</h4>
+					<button id="btn_connect_esp8266" class="btn btn-large" title="Gửi lệnh kết nối đến thiết bị điều khiển bằng web">Kết nối ESP8266</button>
+				</div>
 
-		<div>
-			<h4>Bước 3: Kiểm tra tình trạng hoạt động của thiết bị.</h4>
-			<button id="btn_device_test" class="btn btn-large" title="Kiểm tra tình trạng hoạt động của thiết bị">Kiểm tra thiết bị</button>
-		</div>
-
-
-		<div style="padding-top: 30px;"></div>
-		<h2> II. Bảng hoạt động của hệ thống</h2>
-	    <label class="control control--checkbox">Tự động kéo thanh cuộn xuống khi có chuỗi tin gửi tới. 
-	      <input type="checkbox" checked="checked" id="checkbox-message-scrolldown" />
-	      <div class="control__indicator"></div>
-	    </label>
-		<div class="message">
-			<div class="message-body" id="message-body"></div>
-			<div class="message-control">
-				<input type="text" id="message_command" placeholder="Lệnh điều khiển"></input>
-				<input type="text" id="message_command_value" placeholder="Nội dung lệnh (không bắt buộc)"></input>
-				
-				<button id="btn_message_send" title="Gửi tín hiệu điều khiển">Command</button>
-				<script type="text/javascript" src="./js/message.js"></script>
+				<div class="step-border">
+					<h4>Bước 3: Kiểm tra tình trạng hoạt động của thiết bị.</h4>
+					<button id="btn_device_test" class="btn btn-large" title="Kiểm tra tình trạng hoạt động của thiết bị">Kiểm tra thiết bị</button>
+				</div>
+			</div>
+			<div id="middle_line"></div>
+			<div id="sidebar">
+				<h2 style="color: #e05f00;"> II. Bảng hoạt động của hệ thống</h2>
+			    <label class="control control--checkbox">Tự động kéo thanh cuộn xuống khi có chuỗi tin gửi tới. 
+			      <input type="checkbox" checked="checked" id="checkbox-message-scrolldown" />
+			      <div class="control__indicator"></div>
+			    </label>
+				<div class="message">
+					<div class="message-body" id="message-body"></div>
+					<div class="message-control">
+						<input type="text" id="message_command" placeholder="Lệnh điều khiển"></input>
+						<input type="text" id="message_command_value" placeholder="Nội dung lệnh (không bắt buộc)"></input>
+						
+						<button id="btn_message_send" title="Gửi tín hiệu điều khiển">Command</button>
+						<script type="text/javascript" src="./js/message.js"></script>
+					</div>
+				</div>
 			</div>
 		</div>
 
 
 		<div style="padding-top: 30px;"></div>
-		<h2> III. Danh sách các lệnh điều khiển</h2>
+		<h2 style="color: #e05f00;"> III. Danh sách các lệnh điều khiển</h2>
 		<div style="font-size: 14px;">
 			<h3>1. Lệnh điều khiển role</h3>
 			<b>* Bật, tắt thiết bị</b>

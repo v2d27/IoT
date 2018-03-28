@@ -186,7 +186,7 @@ div.background-test .background-caption span.sub-border {
 
 
 /* CONNECT TAB  ========================================================*/
-@media all and (min-width: 800px) {
+@media all and (min-width: 1024px) {
     .btn {
         color: #fff;
         margin-top: 5px;
@@ -200,12 +200,14 @@ div.background-test .background-caption span.sub-border {
     }
 
 	.btn-large {
-	    width: 400px;
+	    width: 350px;
 	    height: 35px;
 	    border-left-color: #4caF50;
 	    border-left-style: solid;
 	    border-left-color: coral;
 	    background: #2f91b7;
+        margin: 5px auto;
+        display: block;
 	}
 
 }
@@ -214,7 +216,7 @@ div.background-test .background-caption span.sub-border {
 
 
 
-@media all and (max-width: 800px) {
+@media all and (max-width: 1024px) {
     .btn {
         color: #fff;
         margin-top: 5px;
@@ -229,7 +231,7 @@ div.background-test .background-caption span.sub-border {
     }
 
     .btn-large {
-        width: 60%;
+        width: 80%;
         height: 35px;
         border-left-color: #4caF50;
         border-left-style: solid;

@@ -2,7 +2,7 @@
 	.message-body {
 	    overflow-y: scroll;
 		border: 1px solid #DDD;
-		width:  500px;
+		width:  700px;
 		min-height: 400px;
 		height: 400px;
 		min-width: 300px;
@@ -10,7 +10,7 @@
 
 	/*Input text and button command*/
 	.message-control {
-		width: 500px;
+		width: 525px;
 		min-width: 300px;
 	    margin-top: 5px;
 	    margin-bottom: 5px;
@@ -22,6 +22,7 @@
 		color: #555;
 	    outline: none;
 	    border: 1px solid #AAA;
+	    padding-left: 8px;
 
 	}
 	.message-control button {
@@ -165,10 +166,11 @@
 .topic-input input:focus {
 	outline: none;
 	background-color: #EEE;
+	text-decoration: none;
 }
 
 .topic-input input:hover {
 	border: 1px solid #1dc0ff;
-	background-color: #EEEEEE;
+	background-color: #85c2da54;
 	transition: 0.4s;
 }
