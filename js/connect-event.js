@@ -177,11 +177,11 @@ function esp8266_testing_device_received(value)
 			console.log("slider_" + i.toString() + '=' + value.charAt(i));
 			if (value.charAt(i) === '0') {
 				$("slider_" + i.toString()).checked = false;
-				table_show_msg(id, "Đang tắt");
+				table_show_msg(i, "Đang tắt");
 			}
 			if(value.charAt(i) === '1') {
 				$("slider_" + i.toString()).checked = true;
-				table_show_msg(id, "Đang bật");
+				table_show_msg(i, "Đang bật");
 			}
 		}
 

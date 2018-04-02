@@ -84,3 +84,38 @@
   font-size: 20px;
   margin-bottom: 5px;
 }
+
+
+
+
+/*Table control Nha mo hinh*/
+/*Dùng cho thiết bị di động*/
+.table-mohinh table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 97%;
+    font-size: 14px;
+}
+
+.table-mohinh td, th {
+    border: 1px solid #8092838f;
+    padding: 10px;
+}
+
+.table-mohinh td {
+  text-align: center;
+}
+
+.table-mohinh th {
+    background-color: #a0109ce0;
+    color: #EEEEEE;
+}
+
+.table-mohinh tr:hover {
+  background-color: #a0109c0f;
+}
+
+.table-mohinh caption {
+  font-size: 20px;
+  margin-bottom: 5px;
+}

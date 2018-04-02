@@ -1,0 +1,41 @@
+.sensor-gui {
+	border: 2px solid #ccc;
+	border-radius: 10px;
+	padding: 7px 10px;
+	background-color: #FAFAFA;
+}
+
+
+.sensor-control {
+	border: 1px solid #ccc;
+	padding: 5px 0px;
+	margin: 7px 0px;
+	z-index: 5;
+	cursor: pointer;
+}
+
+.sensor-control:hover {
+	background-color: #2793e624;
+	border: 1px solid #60a8ef;
+}
+
+.sensor-control name {
+	//width: 100%;
+	font-family: 'consolas', 'time new roman';
+	font-size: 16px;
+	font-weight: bold;
+	//background-color: #f0f0f0;
+}
+
+.sensor-control data {
+	width: 100%;
+	font-family: 'consolas', 'time new roman';
+	font-size: 13px;
+	//background-color: #f0f0f0;
+}
+
+.sensor-control img {
+	margin-left: 10px;
+	vertical-align: middle;
+	z-index: 0;
+}

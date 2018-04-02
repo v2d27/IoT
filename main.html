@@ -14,6 +14,7 @@
 	<link rel="stylesheet" type="text/css" href="./css/table-control.css">
 	<link rel="stylesheet" type="text/css" href="./css/link-effect.css">
 	<link rel="stylesheet" type="text/css" href="./css/checkbox.css">
+	<link rel="stylesheet" type="text/css" href="./css/cambien.css">
 </head>
 
 
@@ -99,21 +100,22 @@
 	   margin: 0px auto;
 	   padding-bottom: 0px;
 	}
+
 	#post {
 	   width: 42%;
-	   height: 600px;
+	   height: 610px;
 	   float: left;
 	}
 
 	#sidebar {
 		width: 56%;
-		height: 600px;
+		height: 610px;
 		float: right;
 	}
 
 	#middle_line {
 		width: 2px;
-		height: 600px;
+		height: 610px;
 		margin-left: 1%;
 		margin-right: 0.5%;
 		background-color: #8dc5ec;
@@ -145,6 +147,62 @@
 	}
 }
 
+/*Nha mo hinh*/
+@media all and (min-width: 650px) {
+	.spliter2 {
+	   width: 100%;
+	   //border: 1px solid #8dc5ec;
+	   padding: 7px;
+	   overflow: auto;
+	   margin: 0px auto;
+	}
+	#mohinh_left {
+	   width: 50%;
+	   //height: 300px;
+	   float: left;
+	}
+
+	#mohinh_right {
+		width: 40%;
+		//height: 300px;
+		float: right;
+		margin-right: 7%;
+		//background-color: #ABABAB;
+	}
+
+	#middle_line2 {
+		width: 1px;
+		height: 200px;
+		margin-left: 1%;
+		margin-right: 1%;
+		background-color: #5389fd;
+		float: center;
+		vertical-align: middle;
+		display: inline-block;
+	}
+}
+
+/*di động*/
+@media all and (max-width: 650px) {
+	.spliter2 {
+		padding: 30px 0px;
+		padding-bottom: 0px;
+	}
+	#mohinh_left{
+	   display: block;
+	   margin-bottom: 20px;
+	}
+
+	#mohinh_right {
+		display: block;
+		margin-left: 1%;
+		margin-right: 1%;
+	}
+
+	#middle_line2 {
+		display: none;
+	}
+}
 
 .step-border {
 	background-color: #b5b5b542;
@@ -153,6 +211,7 @@
 	margin-bottom: 10px;
 
 }
+
 
 
 </style>
@@ -188,8 +247,8 @@
 		<div class="background-test">
 		  	<div class="background-caption">
 			    <span class="border">HỘI THI</span><br>
-			    <span class="border">THIẾT KẾ MẠCH</span><br>
-			    <span class="sub-border">Chủ đề: "INTERNET OF THINGS"</span>
+			    <span class="border">THIẾT KẾ MẠCH 2018</span><br>
+			    <span class="sub-border">Chủ đề: “Make your own smart-things”</span>
 			</div>
 		</div>
 		<div style="padding-top: 600px;"></div>
@@ -219,15 +278,24 @@
 		<div style="padding: 10px;"></div>
 		<h2 align="center" style="margin-bottom: 0px!important;">Phần I</h2>
 		<h3 align="center" style="margin-top: 0px!important;">Giới thiệu chung về hệ thống điều khiển và giám sát thiết bị điện</h3>
-		<p>"Hệ thống điều khiển và giám sát thiết bị điện" được nhóm nghiên cứu và phát triển để đáp ứng nhu cầu của thực tế về một hệ thống quản lý và giám sát hoàn chỉnh cho các thiết bị điện trong nhà, trong gia đình, tại nơi làm việc,... với tốc độ đáp ứng nhanh chóng, chính xác trong môi trường mạng ít ổn định, băng thông thấp, hay xảy ra nghẽn mạng mà các phương pháp cũ thường hoạt động không ổn định khi gặp phải những vấn đề về mạng này. Thông qua đó, đây là sản phẩm nền tảng để phát triển và ứng dụng vào nhiều dự án IoT (Internet of Things) khác nhau.</p>
-		<p>Hệ thống có thể được điều khiển từ nhiều thiết bị cùng một thời điểm, với yêu cầu duy nhất là có thể kết nối được mạng internet và có trình duyệt truy cập vào internet giúp điều khiển hệ thống. Ví dụ điện thoại smartphone, smart tivi, máy tính,... Website hoạt động được trên nhiều nền tảng và nhiều trình duyệt khác nhau, tuy nhiên hoạt động tốt nhất là trên trình duyệt google chrome. Dưới đây là sơ đồ khối tổng quát của hệ thống:</p>
-		<img src=".\image\system-diagram.png" align="center" style="margin: 0px auto; display: block;">
-		<p><a href="http://mqtt.org/">MQTT</a> (Message Queuing Telemetry Transport) là giao thức truyền tin mới, rất đơn giản và tiết kiệm theo mô hình publish/subscribe (tạm dịch là cung cấp/đăng kí). <a href="http://mqtt.org/">MQTT</a> được thiết kế dành cho các thiết bị và hệ thống mạng có băng thông nhỏ, độ trễ cao hoặc không ổn định. Nguyên lý hoạt động của <a href="http://mqtt.org/">MQTT</a> nhằm làm tối thiểu hóa yêu cầu về băng thông của mạng, tài nguyên của thiết bị đồng thời cũng đảm bảo độ ổn định, chính xác cho quá trình truyền, nhận thông tin. Ngoài ra, nguyên lý trên còn là một giao thức kết nối máy với máy machine-to-machine (M2M) hoặc kết nối vạn vật (IoT) trong các ứng dụng dành cho điện thoại có băng thông và nguồn pin trung bình.</p>
-		<p>Trong một hệ thống sử dụng giao thức MQTT, nhiều thiết bị (mqtt client - gọi tắt client) kết nối tới máy chủ MQTT (gọi là MQTT broker) và đăng kí một hoặc vài topic (chủ đề) để nhận tin và gửi lại tín hiệu tin tức lên máy chủ MQTT. Ở hệ thống này, máy chủ MQTT được chọn ở website <a href="www.cloudmqtt.com">www.cloudmqtt.com</a>. MQTT broker này giao tiếp với người dùng qua website bằng giao thức WebSocket và điều khiển tín hiệu tới các thiết bị IoT bằng giao thức MQTT. Thiết bị mqtt client kết nối internet trong hệ thông này là mạch tích hợp ESP8266 12E trong board mạch NodeMCU 1.0. Ngoài ra, do giới hạn số chân của board mạch ESP8266 và đảm bảo tính ổn định của hệ thống, vi điều khiển ATmega328 được sử dụng để điều khiển các thiết bị ngoại vi đầu cuối.</p>
+		<p>"Hệ thống điều khiển và giám sát thiết bị điện" được nhóm nghiên cứu và phát triển để đáp ứng nhu cầu của thực tế về một hệ thống quản lý và giám sát hoàn chỉnh cho các thiết bị điện trong nhà, trong gia đình, tại nơi làm việc,... với tốc độ đáp ứng nhanh chóng, chính xác trong môi trường mạng ít ổn định, băng thông thấp, hay xảy ra nghẽn mạng mà các phương pháp cũ thường hoạt động không ổn định khi gặp phải những vấn đề về mạng này. Thông qua đó, đây là sản phẩm nền tảng để phát triển và ứng dụng vào nhiều dự án IoT (Internet of Things) khác nhau. Dưới đây là sơ đồ khối tổng quát của hệ thống:</p>
+		<a href=".\image\system-diagram.png"><img src=".\image\system-diagram.png" align="center" style="margin: 0px auto; display: block; width: 90%;"></a>
+		<p>Hệ thống có thể được điều khiển từ nhiều thiết bị cùng một thời điểm theo thời gian thực, với yêu cầu duy nhất là có thể kết nối được mạng internet và có trình duyệt truy cập vào internet giúp điều khiển hệ thống. Ví dụ điện thoại smartphone, smart tivi, máy tính,... Website hoạt động được trên nhiều nền tảng và nhiều trình duyệt khác nhau, tuy nhiên hoạt động tốt nhất là trên trình duyệt google chrome. </p>
+		<p>Người sử dụng cùng lúc có thế giám sát và kiểm tra tình trạng hoạt động của các thiết bị điện, kết hợp giám sát an ninh, chống trộm,... thông qua camera ip được tích hợp vào trong website điều khiển.</p>
+
+
 		<div style="padding: 10px;"></div>
 		<h2 align="center" style="margin-bottom: 0px!important;">Phần II</h2>
 		<h3 align="center" style="margin-top: 0px!important;">Nguyên Lý Hoạt Động Của Hệ Thống</h3>
-
+		<p>Các cảm biến và thiết bị điện được xử lý tín hiệu và điều khiển thống qua giao thức MQTT. <a href="http://mqtt.org/">MQTT</a> (Message Queuing Telemetry Transport) là giao thức truyền tin mới, rất đơn giản và tiết kiệm theo mô hình publish/subscribe (tạm dịch là cung cấp/đăng kí) bản tin. <a href="http://mqtt.org/">MQTT</a> được thiết kế dành cho các thiết bị và hệ thống mạng có băng thông nhỏ, độ trễ cao hoặc không ổn định. Nguyên lý hoạt động của <a href="http://mqtt.org/">MQTT</a> nhằm làm tối thiểu hóa yêu cầu về băng thông của mạng, tài nguyên của thiết bị đồng thời cũng đảm bảo độ ổn định, chính xác cho quá trình truyền, nhận thông tin. Ngoài ra, nguyên lý trên còn là một giao thức kết nối máy với máy machine-to-machine (M2M) hoặc kết nối vạn vật (IoT) trong các ứng dụng dành cho điện thoại có băng thông và nguồn pin trung bình.</p>
+		<p> Đây cũng là giao thức kết nối được các công ty lớn tin dùng và ứng dụng vào sản phẩm của mình như Facebook (Facebook Messenger), Microsoft (dịch vụ điện toán đám mây Microsoft Azure), Amazon (Amazon Web Services),... </p>
+		<a href=".\image\mqtt.png"><img src=".\image\mqtt.png" align="center" style="margin: 0px auto; display: block; width: 90%;"></a>
+		<p>Trong một hệ thống sử dụng giao thức MQTT, nhiều thiết bị hay cảm biến (mqtt client - gọi tắt client) kết nối tới máy chủ MQTT (gọi là MQTT broker) và đăng kí một hoặc vài kênh topic (chủ đề) để nhận tin và gửi lại tín hiệu tin tức lên máy chủ MQTT, thông qua giao thức TCP/IP. Ở hệ thống này, máy chủ MQTT được chọn ở website <a href="www.cloudmqtt.com">www.cloudmqtt.com</a>. MQTT broker này giao tiếp với người dùng qua website bằng giao thức WebSocket và điều khiển tín hiệu tới các thiết bị IoT bằng giao thức MQTT. Thiết bị mqtt client kết nối internet trong hệ thông này là mạch tích hợp ESP8266 12E trong board mạch NodeMCU 1.0. Ngoài ra, do giới hạn số chân của board mạch ESP8266 và đảm bảo tính ổn định của hệ thống, vi điều khiển ATmega328 được sử dụng để điều khiển các thiết bị ngoại vi đầu cuối.</p>
+		<p>So sánh giữa hai giao thức MQTT (Publish/Subscribe) với giao thức HTTPS (GET/POST) truyền thống trong môi trường mạng 3G và mạng wifi:</p>
+		<a href=".\image\sosanh.png"><img src=".\image\sosanh.png" align="center" style="margin: 0px auto; display: block; width: 90%;"></a>
+		<p>Nhận xét: Trong khi gửi liên tục 1024 tín hiệu tới server nhanh nhất có thể thì giao thức MQTT đáp ứng tốt hơn HTTPS.</p>
+		<p>Nguyên lí hoạt động của camera IP:</p>
+		<a href=".\image\camera.png"><img src=".\image\camera.png" align="center" style="margin: 0px auto; display: block; width: 90%;"></a>
 		<div style="padding: 10px;"></div>
 		<h2 align="center" style="margin-bottom: 0px!important;">Phần III</h2>
 		<h3 align="center" style="margin-top: 0px!important;">Mã nguồn website</h3>
@@ -258,13 +326,13 @@
 				</div>
 
 				<div class="step-border">
-					<h4>Bước 2: Kết nối đến thiết bị IoT.</h4>
+					<h4>Bước 2: Kết nối đến thiết bị IoT (ESP8266).</h4>
 					<button id="btn_connect_esp8266" class="btn btn-large" title="Gửi lệnh kết nối đến thiết bị điều khiển bằng web">Kết nối ESP8266</button>
 				</div>
 
 				<div class="step-border">
-					<h4>Bước 3: Kiểm tra tình trạng hoạt động của thiết bị.</h4>
-					<button id="btn_device_test" class="btn btn-large" title="Kiểm tra tình trạng hoạt động của thiết bị">Kiểm tra thiết bị</button>
+					<h4>Bước 3: Kiểm tra tình trạng hoạt động của hệ thống.</h4>
+					<button id="btn_device_test" class="btn btn-large" title="Kiểm tra tình trạng hoạt động của thiết bị">Kiểm tra hệ thống</button>
 				</div>
 			</div>
 			<div id="middle_line"></div>
@@ -343,61 +411,197 @@
 
 	<!--- Control Tab -->
 	<div id="control" class="main-tab-content">
+		<h2 style="text-align: center;">Nhà Mô Hình</h2>
+		<div class="spliter2">
+			<div id="mohinh_left">
+				<div class="table-mohinh">
+					<table align="center" id="table_mohinh">
+						<tr>
+							<th width="10%" >STT</th>
+							<th width="50%">Vị trí</th>
+							<th>Trạng thái</th>
+						</tr>
+
+						<tr>
+							<td>1</td>
+							<td>Role số 1</td>
+							<td>
+							  <div class="slider">
+							    <input type="checkbox" id="slider_5" onclick="slider(5)">
+							    <label for="slider_5">
+							  </div>
+							</td>
+						</tr>
+
+						<tr>
+							<td>2</td>
+							<td>Role số 2</td>
+							<td>
+							  <div class="slider">
+							    <input type="checkbox" id="slider_6" onclick="slider(6)">
+							    <label for="slider_6">
+							  </div>
+							</td>
+						</tr>	
+
+						<tr>
+							<td>3</td>
+							<td>Role số 3</td>
+							<td>
+							  <div class="slider">
+							    <input type="checkbox" id="slider_7" onclick="slider(7)">
+							    <label for="slider_7">
+							  </div>
+							</td>
+						</tr>
+
+						<tr>
+							<td>4</td>
+							<td>Role số 4</td>
+							<td>
+							  <div class="slider">
+							    <input type="checkbox" id="slider_8" onclick="slider(8)">
+							    <label for="slider_8">
+							  </div>
+							</td>
+						</tr>	
+
+						<tr>
+							<td>5</td>
+							<td>Role số 5</td>
+							<td>
+							  <div class="slider">
+							    <input type="checkbox" id="slider_9" onclick="slider(9)">
+							    <label for="slider_9">
+							  </div>
+							</td>
+						</tr>
+
+						<tr>
+							<td>6</td>
+							<td>Role số 6</td>
+							<td>
+							  <div class="slider">
+							    <input type="checkbox" id="slider_10" onclick="slider(10)">
+							    <label for="slider_10">
+							  </div>
+							</td>
+						</tr>	
+
+						<tr>
+							<td>7</td>
+							<td>Role số 7</td>
+							<td>
+							  <div class="slider">
+							    <input type="checkbox" id="slider_11" onclick="slider(11)">
+							    <label for="slider_11">
+							  </div>
+							</td>
+						</tr>		
+					</table>
+				</div>
+			</div>
+			<div id="middle_line2"></div>
+			<div id="mohinh_right">
+				<div class="sensor-gui">
+					<div class="sensor-control" title="Chuyển sang độ C hoặc độ F.">
+						<img src="./image/doC_64.png">
+						<div style="display: inline-block; vertical-align: middle;">
+							<name>Nhiệt độ</name>
+							<br>
+							<data>Giá trị:</data>
+						</div>
+					</div>
+					<div class="sensor-control" title="Độ ẩm không khí">
+						<img src="./image/doam64.png">
+						<div style="display: inline-block; vertical-align: middle;">
+							<name>Độ ẩm không khí</name>
+							<br>
+							<data>Giá trị:</data>
+						</div>
+					</div>
+					<div class="sensor-control" title="Cảm biến mưa">
+						<img src="./image/mua64.png">
+						<div style="display: inline-block; vertical-align: middle;">
+							<name>Cảm biến mưa</name>
+							<br>
+							<data>Giá trị:</data>
+						</div>
+					</div>
+					<div class="sensor-control" title="Chuyển sang chế độ điều khiển hoặc chế độ trình diễn.">
+						<img src="./image/mode64.png">
+						<div style="display: inline-block; vertical-align: middle;">
+							<name>Chế độ hoạt động</name>
+							<br>
+							<data>Giá trị:</data>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+
+		<h2 style="text-align: center;">Camera Giám Sát</h2>
+		<iframe width="854" height="480" src="https://www.youtube.com/embed/u-K3pzS7yOQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="margin: 0 auto; display: block;"></iframe>
+
+
+
+		<div style="margin-top: 20px;"></div>
 		<div class="table-control">
-			<div style="margin-top: 20px;"></div>
-		  <table align="center" id="table_control">
-		    <caption>Bảng điểu khiển</caption>
-		  <tr>
-		    <th width="10%">STT</th>
-		    <th width="40%">Tên thiết bị</th>
-		    <th width="20%">Trạng thái</th>
-		    <th width="30%">Ghi chú</th>
-		  </tr>
-		  <tr>
-		    <td>1</td>
-		    <td>Role số 1</td>
-		    <td>
-		      <div class="slider">
-		        <input type="checkbox" id="slider_1" onclick="slider(1)">
-		        <label for="slider_1">
-		      </div>
-		    </td>
-		    <td>...</td>
-		  </tr>
-		  <tr>
-		    <td>2</td>
-		    <td>Role số 2</td>
-		    <td>
-		      <div class="slider">
-		        <input type="checkbox" id="slider_2" onclick="slider(2)">
-		        <label for="slider_2">
-		      </div>
-		    </td>
-		    <td>...</td>
-		  </tr>
-		  <tr>
-		    <td>3</td>
-		    <td>Role số 3</td>
-		    <td>
-		      <div class="slider">
-		        <input type="checkbox" id="slider_3" onclick="slider(3)">
-		        <label for="slider_3">
-		      </div>
-		    </td>
-		    <td>...</td>
-		  </tr>
-		  <tr>
-		    <td>4</td>
-		    <td>Role số 4</td>
-		    <td>
-		      <div class="slider">
-		        <input type="checkbox" id="slider_4" onclick="slider(4)">
-		        <label for="slider_4">
-		      </div>
-		    </td>
-		    <td>...</td>
-		  </tr>
-		</table>
+	 		<table align="center" id="table_control">
+	    		<caption>Bảng điểu các khiển thiết bị 220VAC</caption>
+				<tr>
+					<th width="10%">STT</th>
+					<th width="40%">Tên thiết bị</th>
+					<th width="20%">Trạng thái</th>
+					<th width="30%">Ghi chú</th>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>Role số 1</td>
+					<td>
+					<div class="slider">
+					<input type="checkbox" id="slider_1" onclick="slider(1)">
+					<label for="slider_1">
+					</div>
+					</td>
+					<td>...</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>Role số 2</td>
+					<td>
+					  <div class="slider">
+					    <input type="checkbox" id="slider_2" onclick="slider(2)">
+					    <label for="slider_2">
+					  </div>
+					</td>
+					<td>...</td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td>Role số 3</td>
+					<td>
+					  <div class="slider">
+					    <input type="checkbox" id="slider_3" onclick="slider(3)">
+					    <label for="slider_3">
+					  </div>
+					</td>
+					<td>...</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>Role số 4</td>
+					<td>
+					  <div class="slider">
+					    <input type="checkbox" id="slider_4" onclick="slider(4)">
+					    <label for="slider_4">
+					  </div>
+					</td>
+					<td>...</td>
+				</tr>
+			</table>
 		</div>
 		<div style="margin-top: 100px;"></div>
 	</div>
