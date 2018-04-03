@@ -2,7 +2,7 @@
 	border: 2px solid #ccc;
 	border-radius: 10px;
 	padding: 7px 10px;
-	background-color: #FAFAFA;
+	background-color: #efefef;
 }
 
 
@@ -12,6 +12,7 @@
 	margin: 7px 0px;
 	z-index: 5;
 	cursor: pointer;
+	background-color: #FFFFFF;
 }
 
 .sensor-control:hover {

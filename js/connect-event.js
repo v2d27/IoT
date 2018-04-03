@@ -3,7 +3,6 @@ function $(element_id) {
 	return document.getElementById(element_id);
 }
 
-
 function _getdatetime() {
     var today = new Date();
     var str = "";
@@ -82,8 +81,8 @@ function esp8266_device()
 			$("btn_connect_esp8266").innerHTML = "Đang kết nối...";
 			$("btn_connect_esp8266").style.backgroundColor = '#555555';
 			console.log("connecting to esp866...");
-			mqtt_push("esp8266", "request_connect");
-			setTimeout(esp8266_device_callback, 5000);
+			mqtt_push("esp:esp8266", "request_connect");
+			setTimeout(esp8266_device_callback, 7000);
 		}
 		else
 		{
@@ -114,7 +113,7 @@ function esp8266_device_callback()
 
 function esp8266_device_received(value)
 {
-	if (value === "success") {
+	if (value === "ok" || value === "success") {
 		ESP8266_ON_CONNECTED = true;
 		$("btn_connect_esp8266").style.backgroundColor = '#22ac3c';
 		$("btn_connect_esp8266").innerHTML = "Đã kết nối";
@@ -129,20 +128,20 @@ function esp8266_device_received(value)
 	}
 }
 
-function esp8266_testing_device()
+function btn_device_test()
 {
 	if (MQTT_ON_CONNECTED === true) {
 		if (ESP8266_ON_CONNECTED === true) {
 			ESP8266_WORKING_STATUS = false;
 			$("btn_device_test").innerHTML = "Đang kiểm tra...";
 			$("btn_device_test").style.backgroundColor = '#555555';
-			console.log("testing ESP8266 device...");
-			mqtt_push("esp8266", "working_status");
-			setTimeout(esp8266_testing_device_callback, 5000);
+			console.log("-> testing system...");
+			mqtt_push("uno:system", "working_status");
+			setTimeout(btn_device_test_callback, 7000);
 		}
 		else
 		{
-			alert("Không thể kết nối đến thiết bị ESP8266. Vui lòng kiểm tra và kết nối lại trước khi kiểm tra thiết bị.");
+			alert("Không thể kết nối đến hệ thống board mạch Arduino Uno R3. Vui lòng kiểm tra và kết nối lại hệ thống...");
 		}
 	}
 	else
@@ -151,7 +150,7 @@ function esp8266_testing_device()
 	}
 }
 
-function esp8266_testing_device_callback()
+function btn_device_test_callback()
 {
 	var str = "Trạng thái:";
 	if($("btn_device_test").innerHTML.substr(0, str.length) === str) {
@@ -161,35 +160,6 @@ function esp8266_testing_device_callback()
 	if (ESP8266_WORKING_STATUS === false) {
 		$("btn_device_test").innerHTML = "Không hoạt động";
 		$("btn_device_test").style.backgroundColor = '#bd0000e6';
-	}
-}
-
-function esp8266_testing_device_received(value)
-{
-	/* 0010 1000 0000 0000 0000 0010 0000 0000 */
-	if(value.length === 31) {
-		ESP8266_WORKING_STATUS = true;
-		$("btn_device_test").style.backgroundColor = '#22ac3c';
-		$("btn_device_test").innerHTML = "Hoạt động trong tình trạng tốt";
-
-
-		for(var i = 1; i <=4; i++) {
-			console.log("slider_" + i.toString() + '=' + value.charAt(i));
-			if (value.charAt(i) === '0') {
-				$("slider_" + i.toString()).checked = false;
-				table_show_msg(i, "Đang tắt");
-			}
-			if(value.charAt(i) === '1') {
-				$("slider_" + i.toString()).checked = true;
-				table_show_msg(i, "Đang bật");
-			}
-		}
-
-	}
-	else
-	{
-		$("btn_device_test").style.backgroundColor = '#b72fa6';
-		$("btn_device_test").innerHTML = "Trạng thái: " + value;
 	}
 }
 
@@ -213,11 +183,13 @@ function slider(id) {
 	}*/
 
 	if($("slider_" + id).checked) {
-		mqtt_push("role" + id, "on");
+		mqtt_push("uno:role" + id, "on");
+		if(id >= 5) return ;
 		table_show_msg(id, "Đang bật");
 	}
 	else {
-		mqtt_push("role" + id, "off");
+		mqtt_push("uno:role" + id, "off");
+		if(id >= 5) return ;
 		table_show_msg(id, "Đang tắt");
 	}
 	
@@ -320,12 +292,49 @@ function onMessageArrived(message) {
 function message_received_processing(message_command, message_command_value)
 {
 	if (message_command === "working_status") {
-		esp8266_testing_device_received(message_command_value);
+		esp8266_device_received(message_command_value);
 	}
 	if (message_command === "respond_connect") {
 		esp8266_device_received(message_command_value);
 	}
-	if (message_command === "role_response") {
+	if (message_command === "web:nhietdo_doam") {
+		cambien_nhietdo_doam(message_command_value);
+	}
+	if(message_command === "web:status") {
+		esp8266_testing_device_received(message_command_value);
+		status(message_command_value);
+	}
+}
 
+
+function esp8266_testing_device_received(value)
+{
+	//web:status=00001000000 29 65 0
+	console.log(value);
+	console.log(value.length);
+
+	if(value.length === 20) {
+		ESP8266_WORKING_STATUS = true;
+		$("btn_device_test").style.backgroundColor = '#22ac3c';
+		$("btn_device_test").innerHTML = "Hoạt động trong tình trạng tốt";
+
+
+		for(var i = 1; i <=4; i++) {
+			console.log("slider_" + i.toString() + '=' + value.charAt(i));
+			if (value.charAt(i) === '0') {
+				$("slider_" + i.toString()).checked = false;
+				table_show_msg(i, "Đang tắt");
+			}
+			if(value.charAt(i) === '1') {
+				$("slider_" + i.toString()).checked = true;
+				table_show_msg(i, "Đang bật");
+			}
+		}
+
+	}
+	else
+	{
+		$("btn_device_test").style.backgroundColor = '#b72fa6';
+		$("btn_device_test").innerHTML = "Trạng thái: " + value;
 	}
 }
