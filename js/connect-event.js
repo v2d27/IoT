@@ -183,12 +183,12 @@ function slider(id) {
 	}*/
 
 	if($("slider_" + id).checked) {
-		mqtt_push("uno:role" + id, "on");
+		mqtt_push("uno:role" + (id-1), "on");
 		if(id >= 5) return ;
 		table_show_msg(id, "Đang bật");
 	}
 	else {
-		mqtt_push("uno:role" + id, "off");
+		mqtt_push("uno:role" + (id-1), "off");
 		if(id >= 5) return ;
 		table_show_msg(id, "Đang tắt");
 	}

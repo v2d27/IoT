@@ -9,6 +9,7 @@
 	<script type="text/javascript" src="./js/mqttws31.js"></script>
 	<script type="text/javascript" src="./js/connect-event.js"></script>
 	<script type="text/javascript" src="./js/cambien.js"></script>
+	<script type="text/javascript" src="./js/youtube-link.js"></script>
 
 	<link rel="stylesheet" type="text/css" href="./css/message.css">
 	<link rel="stylesheet" type="text/css" href="./css/header-bar.css">
@@ -415,6 +416,12 @@
 	<!--- Control Tab -->
 	<div id="control" class="main-tab-content">
 		<h2 style="text-align: center;">Nhà Mô Hình</h2>
+		<div class="home-control">
+			<img src="./image/all_role_on36.png" onclick="all_role_on()" title="Bật tất cả thiết bị">
+			<img src="./image/all_role_off36.png" onclick="all_role_off()" title="Tắt tất cả thiết bị">
+			<img src="./image/auto.png" onclick="all_role_auto()" title="Tự động bật lần lượt từng thiết bị">
+			<img src="./image/refresh36.png" onclick="all_role_refresh()" title="Làm mới dữ liệu">
+		</div>
 		<div class="spliter2">
 			<div id="mohinh_left">
 				<div class="table-mohinh">
@@ -534,7 +541,7 @@
 						<div style="display: inline-block; vertical-align: middle;">
 							<name>Cảm biến mưa</name>
 							<br>
-							<data id="cambien_mua">Không mưa</data>
+							<data id="cambien_mua">collecting...</data>
 						</div>
 					</div>
 					<div class="sensor-control" id="btn_chedo" onclick="btn_chedo()" title="Chuyển sang chế độ điều khiển hoặc chế độ trình diễn.">
@@ -542,19 +549,23 @@
 						<div style="display: inline-block; vertical-align: middle;">
 							<name>Chế độ hoạt động</name>
 							<br>
-							<data id="cambien_hoatdong">Điều khiển</data>
+							<data id="cambien_hoatdong">collecting...</data>
 						</div>
 					</div>
 				</div>
 			</div>
-
 		</div>
 
 
 		<h2 style="text-align: center;">Camera Giám Sát</h2>
-<iframe width="90%" height="480" src="https://www.youtube.com/embed/_Q3lticLYkA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="margin: 0 auto; display: block;"></iframe>
-
-
+		<div id="youtube-control" style="background-color: #efefef; text-align: center; margin-bottom: 10px;">
+			<div>Ex: https://www.youtube.com/embed/__DIOrn_NZ8</div>
+			<input type="text" id="youtube-link" width="80%" value="https://www.youtube.com/embed/" style="width: 80%;">
+			<br>
+			<button id="youtube-load" onclick="youtube_load()">LOAD</button>
+			<button id="youtube-hide" onclick="youtube_hide()">HIDE</button>
+		</div>
+		<iframe id="youtube-frame" width="75%" height="500px" src="123" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="margin: 0 auto; display: block;"></iframe>
 
 		<div style="margin-top: 20px;"></div>
 		<div class="table-control">

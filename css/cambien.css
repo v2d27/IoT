@@ -40,3 +40,22 @@
 	vertical-align: middle;
 	z-index: 0;
 }
+
+.home-control {
+	text-align: center;
+	width: 40%;
+	margin: 0 auto;
+	display: block;
+	background-color: #f1f1f1;
+	border: 1px solid #e665b9;
+}
+
+.home-control img {
+	vertical-align: middle;
+	cursor: pointer;
+	padding: 5px 5px;
+}
+
+.home-control img:hover {
+	background-color: #2793e624;
+}
