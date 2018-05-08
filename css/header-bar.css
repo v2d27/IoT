@@ -142,7 +142,7 @@
 /*Background image*/
 div.background-test {
     width: 100%;
-    height: 400px;
+    height: 550px;
     background-image: url("../image/bga.jpg");
     background-position: center;
     background-repeat: no-repeat;
@@ -156,7 +156,7 @@ div.background-test {
 div.background-test .background-caption {
     position: absolute;
     left: 0px;
-    top: 35%;
+    top: 25%;
     width: 100%;
     text-align: center;
 }
