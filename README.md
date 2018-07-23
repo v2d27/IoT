@@ -14,15 +14,18 @@ https://www.cloudmqtt.com/
 
 #Preview
 
-Homepage page
+###Homepage page
+
 ![wallpaper](https://github.com/Hercules2404/IoT/blob/master/Preview/hompage.JPG)
 =======
 
-Connect page
+###Connect page
+
 ![wallpaper](https://github.com/Hercules2404/IoT/blob/master/Preview/connect.JPG)
 =======
 
-Control Device
+###Control Device
+
 ![wallpaper](https://github.com/Hercules2404/IoT/blob/master/Preview/control.JPG)
 =======
 
