@@ -16,7 +16,7 @@ https://www.cloudmqtt.com/
 
 ###Homepage page
 
-![wallpaper](https://github.com/Hercules2404/IoT/blob/master/Preview/hompage.JPG)
+![wallpaper](https://github.com/Hercules2404/IoT/blob/master/Preview/homepage.JPG)
 =======
 
 ###Connect page
