@@ -12,6 +12,13 @@ MQTT server (MQTT Broker) - hosted message for devices connections:
 https://www.cloudmqtt.com/
 
 
+#Preview
+![wallpaper](https://github.com/Hercules2404/IoT/blob/master/Preview/hompage.JPG)
+=======
+![wallpaper](https://github.com/Hercules2404/IoT/blob/master/Preview/connect.JPG)
+=======
+![wallpaper](https://github.com/Hercules2404/IoT/blob/master/Preview/control.JPG)
+=======
 
 # Date publish
 
